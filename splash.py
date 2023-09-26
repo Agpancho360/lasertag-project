@@ -12,6 +12,7 @@ splash_label = Label(splash_root, text="Splash Screen", font=18)
 splash_label.pack()
  
 # main window function
+#comment
  
  
 def main():
