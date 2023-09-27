@@ -1,30 +1,20 @@
-# Import module
 from tkinter import *
- 
-# Create object
+
 splash_root = Tk()
- 
-# Adjust size
-splash_root.geometry("200x200")
- 
-# Set Label
-splash_label = Label(splash_root, text="Splash Screen", font=18)
-splash_label.pack()
- 
-# main window function
-#comment
- 
- 
-def main():
-    # Create object
+splash_root.title("Splash Screen")
+splash_root.geometry("700x700")
+
+# Load the image and keep a reference to it
+img = PhotoImage(file="logo.jpg")
+splash_label = Label(splash_root, image=img, font=("Helvetica", 18))
+splash_label.pack(pady=20)
+
+def main_window():
+    splash_root.destroy()
     root = Tk()
- 
-    # Adjust size
-    root.geometry("400x400")
- 
- 
-# Call main function
-main()
- 
-# Execute tkinter
-mainloop()
+    root.title("Main Window")
+    root.geometry("200x200")
+
+# Call the main_window function after 3000 milliseconds (3 seconds)
+splash_root.after(3000, main_window)
+splash_root.mainloop()
