@@ -1,15 +1,23 @@
 import socket
 
-msgFromClient = "This message is from Client"
-bytesToSend = str.encode(msgFromClient)
-serverAddressPort = ("127.0.0.1", 20001)
-bufferSize = 1024
+serverAddressPort = ("127.0.0.1", 20001)  # destination
+bufferSize = 1024  # message transmission size
 
-#creates UDP client scoket
+# creates UDP client scoket
 client = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 
-client.sendto(bytesToSend, serverAddressPort)
+while True:
+    # gets equipment code
+    msgFromClient = input("Enter Equipment Code or type 'exit': ")
+    print("-----------------------------")
 
-msgFromServer = client.recvfrom(bufferSize)
-msg = "Message from Server{}".format(msgFromServer[0])
-print(msg)
+    # Sending message to server
+    client.sendto(msgFromClient.encode('ascii'), serverAddressPort)
+
+    # Recieves message from server
+    msgFromServer = client.recvfrom(bufferSize)
+    print("Message from Server{}: ".format(msgFromServer[0]))
+
+    # kills the client
+    if (msgFromClient == "exit"):
+        break
