@@ -6,30 +6,52 @@ SUPABASE_URL = 'https://qjqnfmauqqdjpppdlrdq.supabase.co'
 SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFqcW5mbWF1cXFkanBwcGRscmRxIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTY5Mzk0MjMzNSwiZXhwIjoyMDA5NTE4MzM1fQ.C9GRRux8dixBbjh_nEHhyZotMqhXSn6OY0BEbmcGyik'
 supabase = create_client(SUPABASE_URL, SUPABASE_KEY)
 
+class Player:
+    def __init__(self, ID, first_name, last_name, codename, team):
+        self.ID = ID
+        self.first_name = first_name
+        self.last_name = last_name
+        self.codename = codename
+        self.team = team
+    
+    def insertPlayer(self):
+        data = {'ID' : self.ID,
+                'first_name': self.first_name,
+                'last_name': self.last_name,
+                'codename': self.codename,
+                'team' : self.team}
+        supabase.table('Player').insert(data).execute()
+
+
 # example of data that could be input into the 'Player' table
 data = [
     {
         'ID': 1,  # primary key and must be unique
         'first_name': 'Kaden',
         'last_name': 'Ramirez',
-        'codename': 'Eagleye'  # must be unique
+        'codename': 'Eagleye',  # must be unique
+        'team' : 'Red' # must be Red or Blue (case sensitive)
     },
     {
         'ID': 2,  # primary key and must be unique
         'first_name': 'Alex',
         'last_name': 'Guzman',
-        'codename': 'Thunder_Lips'  # must be unique
+        'codename': 'Thunder_Lips',  # must be unique
+        'team' : 'Blue' # must be Red or Blue (case sensitive)
     },
 ]
+
+# player = Player(3, 'Alex', 'Tavaraz', 'Uknown', 'Blue') # creates player with these attributes
+# player.insertPlayer() # inserts the created player into the Player table in the database
 
 # prints all the data in the 'Player' table
 print(supabase.table('Player').select('*').execute().data)
 
 # inserts data into the player table
-supabase.table('Player').insert(data).execute()
+# supabase.table('Player').insert(data).execute()
 
 # deletes data where 'ID' is equal to 3
-#supabase.table('Player').delete().eq('ID', 3).execute()
+# supabase.table('Player').delete().eq('ID', 3).execute()
 
 # updates the Player table entry codename that has 'ID' = 2 to 'FunnyName'
 # supabase.table('Player').update({'codename' : 'FunnyName'}).eq('ID', 2).execute()
