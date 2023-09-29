@@ -9,22 +9,22 @@ server = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 # sets up server to receive from clients
 server.bind(serverAddressPort)
 print("UDP server up and listening")
-print("-------------------------------")
 
 
-while (True):
-    # recieves client message and client ip address
-    msgFromClient, clientAddress = server.recvfrom(bufferSize)
+# while (True):
+# recieves client message and client ip address
+msgFromClient, clientAddress = server.recvfrom(bufferSize)
 
-    # prints client info
-    print("Message from Client:{}".format(msgFromClient))
-    print("Client IP Address: {}".format(clientAddress))
+# prints client info
+print("Message from Client:{}".format(msgFromClient))
+print("Client IP Address: {}".format(clientAddress))
+print("----------------------------------")
 
-    # sends message back to client
-    msgFromServer = "Hello UDP Client"
-    bytesToSend = str.encode(msgFromServer)
-    server.sendto(bytesToSend, clientAddress)
-    print("----------------------------------")
-    # kills the server
-    if (msgFromClient.decode('utf-8') == "exit"):
-        break
+# sends message back to client
+msgFromServer = "Player 1 has been hit: REPORTED"
+bytesToSend = str.encode(msgFromServer)
+server.sendto(bytesToSend, clientAddress)
+
+# # kills the server
+# if (msgFromClient.decode('utf-8') == "exit"):
+#     break
