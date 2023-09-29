@@ -8,7 +8,7 @@
 
 
 ## GitHub Accounts and Full Names: 
-# Claudia Mercado 
+# Claudia Mercado https://github.com/claauud1a 
 # Alexander Tavarez https://github.com/Xanjt17
 # Alex Guzman https://github.com/Agpancho360 
 # Kaden Ramirez https://github.com/KadenRamirez 
