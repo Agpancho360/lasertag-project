@@ -1,5 +1,4 @@
 import socket
-import dataBase
 
 serverAddressPort = ("127.0.0.1", 20001)  # destination
 bufferSize = 1024  # message transmission size
