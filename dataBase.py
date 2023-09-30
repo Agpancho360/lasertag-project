@@ -10,12 +10,15 @@ class Player:
     def __init__(self, first_name, last_name, codename, team):
         
         response = supabase.table('Player').select('ID', count='exact').execute()
-        new_ID = response.count + 1
-        self.ID = new_ID
+        player_ID = response.count + 1
+        response = supabase.table('Player').select('equipment_ID', count='exact').execute()
+        equip_ID = response.count + 100
+        self.ID = player_ID
         self.first_name = first_name
         self.last_name = last_name
         self.codename = codename
         self.team = team
+        self.equipment_ID = equip_ID
     
     def insertPlayer(self):
         
@@ -23,7 +26,8 @@ class Player:
                 'first_name': self.first_name,
                 'last_name': self.last_name,
                 'codename': self.codename,
-                'team' : self.team}
+                'team' : self.team,
+                'equipment_ID' : self.equipment_ID}
         supabase.table('Player').insert(data).execute()
 
 
@@ -34,14 +38,16 @@ data = [
         'first_name': 'Kaden',
         'last_name': 'Ramirez',
         'codename': 'Eagleye',  # must be unique
-        'team' : 'Red' # must be Red or Blue (case sensitive)
+        'team' : 'Red', # must be Red or Blue (case sensitive)
+        'equipment_ID' : 100 # must be unique
     },
     {
         'ID': 2,  # primary key and must be unique
         'first_name': 'Alex',
         'last_name': 'Guzman',
         'codename': 'Thunder_Lips',  # must be unique
-        'team' : 'Blue' # must be Red or Blue (case sensitive)
+        'team' : 'Blue', # must be Red or Blue (case sensitive)
+        'equipment_ID' : 101 # must be unique
     },
 ]
 
