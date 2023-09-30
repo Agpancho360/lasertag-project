@@ -1,5 +1,6 @@
 import os
 from supabase import create_client
+import udp_client
 
 # setupt to get into the project database
 SUPABASE_URL = 'https://qjqnfmauqqdjpppdlrdq.supabase.co'
@@ -29,6 +30,8 @@ class Player:
                 'team' : self.team,
                 'equipment_ID' : self.equipment_ID}
         supabase.table('Player').insert(data).execute()
+        msgFromClient = str(self.equipment_ID)
+        udp_client.sendMessage(msgFromClient)
 
 
 # example of data that could be input into the 'Player' table
@@ -51,8 +54,8 @@ data = [
     },
 ]
 
-# player = Player('Alex', 'Tavaraz', 'Uknown', 'Blue') # creates player with these attributes
-# player.insertPlayer() # inserts the created player into the Player table in the database
+player = Player('Alex', 'Tavaraz', 'Uknown', 'Blue') # creates player with these attributes
+player.insertPlayer() # inserts the created player into the Player table in the database
 
 # prints all the data in the 'Player' table
 # print(supabase.table('Player').select('*').execute().data)
