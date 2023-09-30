@@ -1,5 +1,7 @@
 import tkinter as tk
 from tkinter import ttk
+import dataBase
+
 
 def main_window():
     splash_root.withdraw()
@@ -147,3 +149,8 @@ splash_label.pack()
 splash_root.after(3000, main_window)
 
 splash_root.mainloop()
+
+#adds a player to the player table
+#                     first name, last name, codename, team
+player = dataBase.Player('Leslie', 'P', 'asdf', 'Red')
+player.insertPlayer()
