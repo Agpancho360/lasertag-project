@@ -54,8 +54,8 @@ data = [
     },
 ]
 
-player = Player('Alex', 'Tavaraz', 'Uknown', 'Blue') # creates player with these attributes
-player.insertPlayer() # inserts the created player into the Player table in the database
+# player = Player('Alex', 'Tavaraz', 'Uknown', 'Blue') # creates player with these attributes
+# player.insertPlayer() # inserts the created player into the Player table in the database
 
 # prints all the data in the 'Player' table
 # print(supabase.table('Player').select('*').execute().data)
