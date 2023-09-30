@@ -7,14 +7,18 @@ SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJ
 supabase = create_client(SUPABASE_URL, SUPABASE_KEY)
 
 class Player:
-    def __init__(self, ID, first_name, last_name, codename, team):
-        self.ID = ID
+    def __init__(self, first_name, last_name, codename, team):
+        
+        response = supabase.table('Player').select('ID', count='exact').execute()
+        new_ID = response.count + 1
+        self.ID = new_ID
         self.first_name = first_name
         self.last_name = last_name
         self.codename = codename
         self.team = team
     
     def insertPlayer(self):
+        
         data = {'ID' : self.ID,
                 'first_name': self.first_name,
                 'last_name': self.last_name,
@@ -41,14 +45,14 @@ data = [
     },
 ]
 
-# player = Player(3, 'Alex', 'Tavaraz', 'Uknown', 'Blue') # creates player with these attributes
-# player.insertPlayer() # inserts the created player into the Player table in the database
+player = Player('Alex', 'Tavaraz', 'Uknown', 'Blue') # creates player with these attributes
+player.insertPlayer() # inserts the created player into the Player table in the database
 
 # prints all the data in the 'Player' table
-print(supabase.table('Player').select('*').execute().data)
+# print(supabase.table('Player').select('*').execute().data)
 
 # inserts data into the player table
-# supabase.table('Player').insert(data).execute()
+#supabase.table('Player').insert(data).execute()
 
 # deletes data where 'ID' is equal to 3
 # supabase.table('Player').delete().eq('ID', 3).execute()
