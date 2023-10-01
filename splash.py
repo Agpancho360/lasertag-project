@@ -2,18 +2,23 @@ import tkinter as tk
 from tkinter import ttk
 import dataBase
 
-
+# Define the main window function
 def main_window():
+    # Hide the splash screen
     splash_root.withdraw()
+
+    # Create the main application window
     root = tk.Tk()
     root.title("Laser Tag Game")
-    root.geometry("1400x600")  # Adjusted width to accommodate both tables
+    root.geometry("1400x600")
     root.configure(bg="black")
 
+    # Function to create a table for displaying player data
     def create_table(parent, team_name, background_color, num_empty_rows=10):
         table_frame = tk.Frame(parent, bg=background_color)
         table_frame.pack(side="left", padx=10)
 
+        # Create labels for table headers
         team_label = tk.Label(table_frame, text=team_name, font=(
             "Impact", 20, "bold"), bg=background_color, fg="white")
         team_label.grid(row=0, column=0, columnspan=4, pady=(10, 5))
@@ -43,6 +48,7 @@ def main_window():
 
         return table_frame
 
+    # Function to update the player data table
     def update_table(table_frame, data):
         for i, data_row in enumerate(data, start=2):
             for j, data in enumerate(data_row):
@@ -50,32 +56,34 @@ def main_window():
                                  bg=table_frame.cget("bg"), fg="white")
                 label.grid(row=i, column=j)
 
+    # Function to add a new player
     def add_player():
-        # get rid of new_ in front of names
-        # try to use this naming convention team = team_entry.get()
-        team = team_var.get()  # team is not bringing the correct string back
+        team = team_var.get()  # Get the selected team
         print(team)
-        # look at line 63
-        new_id = id_entry.get()
-        new_first_name = first_name_entry.get()
-        new_last_name = last_name_entry.get()
-        new_codename = codename_entry.get()
-        player = dataBase.Player(
-            new_first_name, new_last_name, new_codename, team)  # it'll work with the string "Red" but not with team (variable)
+        id = id_entry.get()
+        first_name = first_name_entry.get()
+        last_name = last_name_entry.get()
+        codename = codename_entry.get()
+
+        # Create a Player object and insert it into the database
+        player = dataBase.Player(first_name, last_name, codename, team)
         player.insertPlayer()
+
+        # Update the data for the selected team and update the table
         if team == "Red Team":
-            red_data.append(
-                (new_id, new_first_name, new_last_name, new_codename))
+            red_data.append((id, first_name, last_name, codename))
             update_table(red_table_frame, red_data)
         elif team == "Blue Team":
-            blue_data.append(
-                (new_id, new_first_name, new_last_name, new_codename))
+            blue_data.append((id, first_name, last_name, codename))
             update_table(blue_table_frame, blue_data)
 
+        # Clear the input fields
         id_entry.delete(0, tk.END)
         first_name_entry.delete(0, tk.END)
         last_name_entry.delete(0, tk.END)
         codename_entry.delete(0, tk.END)
+
+    # Default data for Red and Blue teams
     red_data = [
         ("1", "Kaden", "Ramirez", "Eagleye"),
     ]
@@ -97,6 +105,7 @@ def main_window():
         "Helvetica", 16, "bold"), bg="white", fg="black")
     player_entry_label.grid(row=0, column=0, columnspan=4, pady=(10, 5))
 
+    # Create input fields and labels for player information
     id_label = tk.Label(player_entry_frame, text="ID:", font=(
         "Helvetica", 12), bg="white", fg="black")
     id_label.grid(row=1, column=0, padx=10)
@@ -121,6 +130,7 @@ def main_window():
     codename_entry = tk.Entry(player_entry_frame, font=("Helvetica", 12))
     codename_entry.grid(row=2, column=3, padx=10)
 
+    # Create a dropdown menu for selecting the team
     team_var = tk.StringVar()
     team_label = tk.Label(player_entry_frame, text="Select Team:", font=(
         "Helvetica", 12), bg="white", fg="black")
@@ -129,6 +139,7 @@ def main_window():
         player_entry_frame, team_var, "Red", "Blue")
     team_menu.grid(row=3, column=1, padx=10)
 
+    # Create a button to add a new player
     add_button = tk.Button(player_entry_frame, text="Add Player", font=(
         "Helvetica", 12), command=add_player)
     add_button.grid(row=3, column=2, padx=10, pady=10)
@@ -138,6 +149,7 @@ def main_window():
         "Helvetica", 12), bg="black", fg="white")
     selected_team_label.grid(row=4, column=0, columnspan=4, padx=10)
 
+    # Function to update the selected team label when team_var changes
     def update_selected_team_label(*args):
         selected_team_label.config(text="Selected Team: " + team_var.get())
 
@@ -160,20 +172,19 @@ def main_window():
     update_table(red_table_frame, red_data)
     update_table(blue_table_frame, blue_data)
 
-
+# Create the splash screen
 splash_root = tk.Tk()
 splash_root.title("Laser Tag Game")
 splash_root.geometry("700x700")
 
+# Load and display an image on the splash screen
 img = tk.PhotoImage(file="logo.png")
 img = img.subsample(img.width() // 700, img.height() // 700)
-
 splash_label = tk.Label(splash_root, image=img)
 splash_label.pack()
 
+# Schedule the main_window function to run after 3 seconds
 splash_root.after(3000, main_window)
 
+# Start the main event loop
 splash_root.mainloop()
-
-# adds a player to the player table
-#                     first name, last name, codename, team
