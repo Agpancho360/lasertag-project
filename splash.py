@@ -54,13 +54,14 @@ def main_window():
         # get rid of new_ in front of names
         # try to use this naming convention team = team_entry.get()
         team = team_var.get()  # team is not bringing the correct string back
+        print(team)
         # look at line 63
         new_id = id_entry.get()
         new_first_name = first_name_entry.get()
         new_last_name = last_name_entry.get()
         new_codename = codename_entry.get()
         player = dataBase.Player(
-            new_first_name, new_last_name, new_codename, "Red")  # it'll work with the string "Red" but not with team (variable)
+            new_first_name, new_last_name, new_codename, team)  # it'll work with the string "Red" but not with team (variable)
         player.insertPlayer()
         if team == "Red Team":
             red_data.append(
@@ -121,7 +122,6 @@ def main_window():
     codename_entry.grid(row=2, column=3, padx=10)
 
     team_var = tk.StringVar()
-    team_var.set("Red Team")
     team_label = tk.Label(player_entry_frame, text="Select Team:", font=(
         "Helvetica", 12), bg="white", fg="black")
     team_label.grid(row=3, column=0, padx=10)
@@ -134,7 +134,7 @@ def main_window():
     add_button.grid(row=3, column=2, padx=10, pady=10)
 
     # Create a label to display the selected team
-    selected_team_label = tk.Label(left_frame, text="Selected Team: Red Team", font=(
+    selected_team_label = tk.Label(left_frame, text="Selected Team:", font=(
         "Helvetica", 12), bg="black", fg="white")
     selected_team_label.grid(row=4, column=0, columnspan=4, padx=10)
 
