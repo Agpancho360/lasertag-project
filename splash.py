@@ -51,12 +51,17 @@ def main_window():
                 label.grid(row=i, column=j)
 
     def add_player():
-        team = team_var.get()
+        # get rid of new_ in front of names
+        # try to use this naming convention team = team_entry.get()
+        team = team_var.get()  # team is not bringing the correct string back
+        # look at line 63
         new_id = id_entry.get()
         new_first_name = first_name_entry.get()
         new_last_name = last_name_entry.get()
         new_codename = codename_entry.get()
-
+        player = dataBase.Player(
+            new_first_name, new_last_name, new_codename, "Red")  # it'll work with the string "Red" but not with team (variable)
+        player.insertPlayer()
         if team == "Red Team":
             red_data.append(
                 (new_id, new_first_name, new_last_name, new_codename))
@@ -70,9 +75,6 @@ def main_window():
         first_name_entry.delete(0, tk.END)
         last_name_entry.delete(0, tk.END)
         codename_entry.delete(0, tk.END)
-        player = dataBase.Player(
-            new_first_name, new_last_name, new_codename, team)
-        player.insertPlayer()
     red_data = [
         ("1", "Kaden", "Ramirez", "Eagleye"),
     ]
@@ -124,7 +126,7 @@ def main_window():
         "Helvetica", 12), bg="white", fg="black")
     team_label.grid(row=3, column=0, padx=10)
     team_menu = tk.OptionMenu(
-        player_entry_frame, team_var, "Red Team", "Blue Team")
+        player_entry_frame, team_var, "Red", "Blue")
     team_menu.grid(row=3, column=1, padx=10)
 
     add_button = tk.Button(player_entry_frame, text="Add Player", font=(
