@@ -1,6 +1,6 @@
 # Title: Laser Tag Project - Team 13 
 
-## Project Description: This application is a scoreboard for Photon Lasertag. The application keeps track of player entries and current running game score. The application is written in Python.
+# Project Description: This application is a scoreboard for Photon Lasertag. The application keeps track of player entries and current running game score. The application is written in Python.
 
 ## Prerequisites: 
 # Install Python (Tkinter is installed by default)
