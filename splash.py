@@ -4,7 +4,7 @@ from tkinter import ttk
 def main_window():
     splash_root.withdraw()
     root = tk.Tk()
-    root.title("Laser Tag Game")
+    root.title("Laser tag game")
     root.geometry("1400x600")  # Adjusted width to accommodate both tables
     root.configure(bg="black")
 
