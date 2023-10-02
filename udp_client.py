@@ -12,7 +12,8 @@ def sendMessage(msgFromClient):
 
     # Set socket options to enable broadcast
     client.setsockopt(socket.SOL_SOCKET, socket.SO_BROADCAST, 1)
-    client.sendto(msgFromClient.encode('ascii'), (serverAddressPort))
+    client.sendto(msgFromClient.encode('ascii'), serverAddressPort)
+
     # client.sendto(msgFromClient.encode('ascii'), serverAddressPort) # sends message to the server
 
     # Recieves message from server

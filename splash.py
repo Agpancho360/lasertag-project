@@ -3,7 +3,13 @@ from tkinter import ttk
 import dataBase
 
 # Define the main window function
+
+
 def main_window():
+    # initalizes data for table use
+    red_team_data = [list(row.values()) for row in dataBase.getRedTeamData()]
+    blue_team_data = [list(row.values()) for row in dataBase.getBlueTeamData()]
+
     # Hide the splash screen
     splash_root.withdraw()
 
@@ -51,31 +57,30 @@ def main_window():
     # Function to update the player data table
     def update_table(table_frame, data):
         for i, data_row in enumerate(data, start=2):
-            for j, data in enumerate(data_row):
-                label = tk.Label(table_frame, text=data,
+            for j, cell_data in enumerate(data_row):
+                label = tk.Label(table_frame, text=cell_data,
                                  bg=table_frame.cget("bg"), fg="white")
                 label.grid(row=i, column=j)
 
     # Function to add a new player
     def add_player():
         team = team_var.get()  # Get the selected team
-        print(team)
-        id = id_entry.get()
         first_name = first_name_entry.get()
         last_name = last_name_entry.get()
         codename = codename_entry.get()
-
         # Create a Player object and insert it into the database
         player = dataBase.Player(first_name, last_name, codename, team)
         player.insertPlayer()
 
         # Update the data for the selected team and update the table
-        if team == "Red Team":
-            red_data.append((id, first_name, last_name, codename))
-            update_table(red_table_frame, red_data)
-        elif team == "Blue Team":
-            blue_data.append((id, first_name, last_name, codename))
-            update_table(blue_table_frame, blue_data)
+        if team == "Red":
+            red_team_data = [list(row.values())
+                             for row in dataBase.getRedTeamData()]
+            update_table(red_table_frame, red_team_data)
+        elif team == "Blue":
+            blue_team_data = [list(row.values())
+                              for row in dataBase.getBlueTeamData()]
+            update_table(blue_table_frame, blue_team_data)
 
         # Clear the input fields
         id_entry.delete(0, tk.END)
@@ -84,13 +89,6 @@ def main_window():
         codename_entry.delete(0, tk.END)
 
     # Default data for Red and Blue teams
-    red_data = [
-        ("1", "Kaden", "Ramirez", "Eagleye"),
-    ]
-
-    blue_data = [
-        ("2", "Alex", "Guzman", "Thunder_Lips"),
-    ]
 
     # Create the left frame for input elements
     left_frame = tk.Frame(root, bg="black")
@@ -169,8 +167,9 @@ def main_window():
         right_frame, team_name="Blue Team", background_color="#0000FF")
 
     # Initialize tables with default data
-    update_table(red_table_frame, red_data)
-    update_table(blue_table_frame, blue_data)
+    update_table(red_table_frame, red_team_data)
+    update_table(blue_table_frame, blue_team_data)
+
 
 # Create the splash screen
 splash_root = tk.Tk()
