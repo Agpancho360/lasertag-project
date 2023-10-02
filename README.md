@@ -1,6 +1,6 @@
 # Title: Laser Tag Project - Team 13
 
-##### Description: This application is a scoreboard for Photon Lasertag. The application keeps track of player entries and current running game score. The application is written in Python.
+#### Description: This application is a scoreboard for Photon Lasertag. The application keeps track of player entries and current running game score. The application is written in Python.
 
 # Building the project:
 1. Run this command in the terminal ```pip install supabase``` to download the supabase client
