@@ -78,10 +78,9 @@ def main_window():
             update_table(blue_table_frame, blue_team_data)
 
         # Clear the input fields
-        # id_entry.delete(0, customtkinter.CTkEntry.END)
-        first_name_entry.delete(0, customtkinter.CTkEntry.END)
-        last_name_entry.delete(0, customtkinter.CTkEntry.END)
-        codename_entry.delete(0, customtkinter.CTkEntry.END)
+        first_name_entry.delete(0, customtkinter.END)
+        last_name_entry.delete(0,customtkinter.END)
+        codename_entry.delete(0, customtkinter.END)
    # **************************************Left Frame *******************************************************
     left_frame = customtkinter.CTkFrame(root, fg_color="transparent")
     left_frame.grid(row=0, column=0)
