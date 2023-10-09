@@ -1,4 +1,4 @@
 :: starter.bat
 @echo off
 start python udp_server.py
-start python sample.py
+start python main.py
