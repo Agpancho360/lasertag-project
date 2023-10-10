@@ -53,11 +53,9 @@ def add_player():
         player = dataBase.Player(first_name, last_name, codename, team)
         player.insertPlayer()
         if team == "Red":
-            red_team_data = [list(row.values())for row in dataBase.getRedTeamData()]
-            redTable.update_table(redTable.table_frame, red_team_data)
+            redTable.update_table()
         elif team == "Blue":
-            blue_team_data = [list(row.values())for row in dataBase.getBlueTeamData()]
-            blueTable.update_table(blueTable.table_frame, blue_team_data)
+            blueTable.update_table()
 
         # Clear the input fields
         first_name_entry.delete(0, customtkinter.END)

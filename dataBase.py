@@ -48,6 +48,10 @@ def getBlueTeamData():
         'ID, first_name, last_name, codename').eq('team', 'Blue').execute()
     return data[1]
 
+def clearData():
+    supabase.table('Player').delete().gte('ID', 1).execute()
+
+
 
 # example of data that could be input into the 'Player' table
 # data = [

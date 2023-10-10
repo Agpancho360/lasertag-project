@@ -6,7 +6,10 @@ import dataBase
 import playerEntry
 import blueTable
 import redTable
-
+def deleteData(event):
+    dataBase.clearData()
+    redTable.update_table()
+    blueTable.update_table()
 def main_window():
     # Hide the splash screen
     splash_root.withdraw()
@@ -17,6 +20,7 @@ def main_window():
     root.configure(bg="black")
     root.grid_rowconfigure(0, weight=1)
     root.grid_columnconfigure(0, weight=1)
+    root.bind("<F12>",deleteData)
     #creates left frame for playerEntryScreen
     left_frame = customtkinter.CTkFrame(root, fg_color="transparent")
     left_frame.grid(row=0, column=0) #positions left frame to be to the left
