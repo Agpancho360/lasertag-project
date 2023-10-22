@@ -1,4 +1,3 @@
-#sample.py
 import customtkinter
 import tkinter
 from tkinter import ttk
@@ -6,10 +5,22 @@ import dataBase
 import playerEntry
 import blueTable
 import redTable
+
 def deleteData(event):
     dataBase.clearData()
     redTable.update_table()
     blueTable.update_table()
+
+def createNewWindow(event):
+    # Need to still add countdown timer beforehand
+    new_window = tkinter.Toplevel()
+    new_window.title("Play Action Screen")
+    new_window.geometry("800x600")
+    #We can change the design as needed
+    new_label = tkinter.Label(new_window, text="Sample Text")
+    new_label.pack()
+
+
 def main_window():
     # Hide the splash screen
     splash_root.withdraw()
@@ -20,17 +31,19 @@ def main_window():
     root.configure(bg="black")
     root.grid_rowconfigure(0, weight=1)
     root.grid_columnconfigure(0, weight=1)
-    root.bind("<F12>",deleteData)
-    #creates left frame for playerEntryScreen
+    root.bind("<F12>", deleteData)
+    root.bind("<F5>", createNewWindow) 
+
+    # creates left frame for playerEntryScreen
     left_frame = customtkinter.CTkFrame(root, fg_color="transparent")
-    left_frame.grid(row=0, column=0) #positions left frame to be to the left
-    #playerEntrySCreen
-    playerEntry.createPlayerEntryFrame(left_frame,"#8d99ae", 5, "#2b2d42")
-    #creates right frame for red/blue table frames
+    left_frame.grid(row=0, column=0)  # positions left frame to be to the left
+    # playerEntryScreen
+    playerEntry.createPlayerEntryFrame(left_frame, "#8d99ae", 5, "#2b2d42")
+    # creates right frame for red/blue table frames
     right_frame = customtkinter.CTkFrame(root, fg_color="transparent")
-    right_frame.grid(row=0, column=1) #positions left frame to be to the left
+    right_frame.grid(row=0, column=1)  # positions left frame to be to the left
     blueTable.createBlueTableFrame(right_frame, "Blue Team", "#61bbe7", "#0577ac")
-    redTable.createRedTableFrame (right_frame, "Red Team","#e23b4a","#900A22")
+    redTable.createRedTableFrame(right_frame, "Red Team", "#e23b4a", "#900A22")
 
 # Create the splash screen
 splash_root = tkinter.Tk()
