@@ -11,14 +11,25 @@ def deleteData(event):
     redTable.update_table()
     blueTable.update_table()
 
+def countdown_timer(new_window, label, count):
+    #destroys window 1 second after zero
+    if count < 0:
+        new_window.destroy()
+        return
+    label.config(text=str(count))
+    new_window.after(1000, countdown_timer, new_window, label, count - 1)
+
+
 def createNewWindow(event):
-    # Need to still add countdown timer beforehand
     new_window = tkinter.Toplevel()
     new_window.title("Play Action Screen")
     new_window.geometry("800x600")
-    #We can change the design as needed
-    new_label = tkinter.Label(new_window, text="Sample Text")
-    new_label.pack()
+    
+    label = tkinter.Label(new_window, text="5", font=("Arial", 24))
+    label.pack()
+    
+    #calls countdown timer upon window creation
+    countdown_timer(new_window, label, 5) #window, label, number to start countdown with
 
 
 def main_window():
