@@ -26,7 +26,7 @@ def createNewWindow(event):
     new_window.geometry("800x600")
     new_window.configure(bg = "black")
     label = tkinter.Label(new_window, text="5", font=("Impact", 45), fg = "whitesmoke", background = 'black')
-    label.pack()
+    label.pack(fill='both', expand=True)
     
     #calls countdown timer upon window creation
     countdownTimer(new_window, label, 5) #window, label, number to start countdown with
