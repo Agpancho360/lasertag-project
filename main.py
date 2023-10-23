@@ -24,8 +24,8 @@ def createNewWindow(event):
     new_window = tkinter.Toplevel()
     new_window.title("Play Action Screen")
     new_window.geometry("800x600")
-    
-    label = tkinter.Label(new_window, text="5", font=("Arial", 24))
+    new_window.configure(bg = "black")
+    label = tkinter.Label(new_window, text="5", font=("Impact", 45), fg = "whitesmoke", background = 'black')
     label.pack()
     
     #calls countdown timer upon window creation
