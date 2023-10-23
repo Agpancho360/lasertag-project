@@ -11,13 +11,13 @@ def deleteData(event):
     redTable.update_table()
     blueTable.update_table()
 
-def countdown_timer(new_window, label, count):
+def countdownTimer(new_window, label, count):
     #destroys window 1 second after zero
     if count < 0:
         new_window.destroy()
         return
     label.config(text=str(count))
-    new_window.after(1000, countdown_timer, new_window, label, count - 1)
+    new_window.after(1000, countdownTimer, new_window, label, count - 1)
 
 
 def createNewWindow(event):
@@ -29,7 +29,7 @@ def createNewWindow(event):
     label.pack()
     
     #calls countdown timer upon window creation
-    countdown_timer(new_window, label, 5) #window, label, number to start countdown with
+    countdownTimer(new_window, label, 5) #window, label, number to start countdown with
 
 
 def main_window():
