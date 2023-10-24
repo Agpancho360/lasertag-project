@@ -31,12 +31,13 @@ def createNewWindow(event):
     label.pack(fill='both', expand=True)
     
     #calls countdown timer upon window creation
-    countdownTimer(new_window, label, 5) #window, label, number to start countdown with
+    timerCount = 30
+    countdownTimer(new_window, label, timerCount) #window, label, number to start countdown with
 
     #add red and blue frames to the window
-    new_window.after(6000, lambda: playActionDisplay.createRedPlayerFrame(new_window, "Red Team", "#e23b4a", "#900A22"))
+    new_window.after(timerCount * 1000 + 1000, lambda: playActionDisplay.createRedPlayerFrame(new_window, "Red Team", "#e23b4a", "#900A22"))
      # Creates the blue player frame
-    new_window.after(6000, lambda: playActionDisplay.createBluePlayerFrame(new_window, "Blue Team", "#61bbe7", "#0577ac"))
+    new_window.after(timerCount * 1000 + 1000, lambda: playActionDisplay.createBluePlayerFrame(new_window, "Blue Team", "#61bbe7", "#0577ac"))
 
 def main_window():
     # Hide the splash screen
