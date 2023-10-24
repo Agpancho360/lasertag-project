@@ -3,6 +3,7 @@ import customtkinter
 import dataBase
 import redTable
 import blueTable
+import playActionDisplay
 
 
 
@@ -54,8 +55,10 @@ def add_player():
         player.insertPlayer()
         if team == "Red":
             redTable.update_table()
+            playActionDisplay.updateTableRed(playActionDisplay.redFrame)
         elif team == "Blue":
             blueTable.update_table()
+            playActionDisplay.updateTableBlue(playActionDisplay.blueFrame)
 
         # Clear the input fields
         first_name_entry.delete(0, customtkinter.END)
