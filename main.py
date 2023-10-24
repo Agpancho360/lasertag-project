@@ -14,7 +14,8 @@ def deleteData(event):
 def countdownTimer(new_window, label, count):
     #destroys window 1 second after zero
     if count < 0:
-        new_window.destroy()
+        label.destroy()
+        #new_window.destroy()
         return
     label.config(text=str(count))
     new_window.after(1000, countdownTimer, new_window, label, count - 1)
