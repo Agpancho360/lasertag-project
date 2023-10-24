@@ -23,12 +23,12 @@ def createRedPlayerFrame(parent, team_name, background_color, border_color):
                 label = tkinter.Label(table_frame, text="")
                 label.grid(row=i + 2, column=j)
                 label.config(bg = background_color)
-        update_table_red()
+        updateTableRed()
 
         return table_frame
 
 
-def update_table_red():
+def updateTableRed():
     background_color = "#e23b4a"
     # Clear existing rows in the table
     for widget in table_frame.winfo_children():
@@ -62,28 +62,28 @@ def update_table_red():
             label.grid(row=i, column=j)
             label.config(bg = background_color)
             
-def update_table_blue():
+def updateTableBlue():
     background_color = "#61bbe7"
     # Clear existing rows in the table
-    for widget in blue_table_frame.winfo_children():
+    for widget in table_frame.winfo_children():
         widget.destroy()
 
     # Create Team Score
-    team_score = tkinter.Label(blue_table_frame, text="Blue Team Score: " + "0 ", font=("Impact", 15), fg="whitesmoke")
+    team_score = tkinter.Label(table_frame, text="Blue Team Score: " + "0 ", font=("Impact", 15), fg="whitesmoke")
     team_score.grid(row=0, column=0, padx=25, pady=25)
     team_score.config(bg=background_color)
 
     # Create headers
     headers = ["Codename", "Player Score"]
     for j, header in enumerate(headers):
-        label = tkinter.Label(blue_table_frame, text=header, font=("Impact", 15), fg="whitesmoke")
+        label = tkinter.Label(table_frame, text=header, font=("Impact", 15), fg="whitesmoke")
         label.grid(row=1, column=j, padx=25, pady=15)
         label.config(bg=background_color)
 
     num_empty_rows = 10
     for i in range(num_empty_rows):
         for j in range(2):
-            label = tkinter.Label(blue_table_frame, text="")
+            label = tkinter.Label(table_frame, text="")
             label.grid(row=i + 2, column=j)
             label.config(bg=background_color)
 
@@ -92,6 +92,6 @@ def update_table_blue():
     # Add new data to the table
     for i, data_row in enumerate(new_data, start=2):  # Start at index 2 for data rows
         for j, cell_data in enumerate(data_row):
-            label = tkinter.Label(blue_table_frame, text=cell_data, font=("Arial", 10), fg="whitesmoke")
+            label = tkinter.Label(table_frame, text=cell_data, font=("Arial", 10), fg="whitesmoke")
             label.grid(row=i, column=j)
             label.config(bg=background_color)
