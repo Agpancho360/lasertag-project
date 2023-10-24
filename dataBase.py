@@ -48,6 +48,16 @@ def getBlueTeamData():
         'ID, first_name, last_name, codename').eq('team', 'Blue').execute()
     return data[1]
 
+def getRedPlayerData():
+    data, count = supabase.table('Player').select(
+        'codename, player_score').eq('team', 'Red').execute()
+    return data[1]
+
+def getBluePlayerData():
+    data, count = supabase.table('Player').select(
+        'codename, player_score').eq('team', 'Blue').execute()
+    return data[1]
+
 def clearData():
     supabase.table('Player').delete().gte('ID', 1).execute()
 

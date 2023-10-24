@@ -5,6 +5,7 @@ import dataBase
 import playerEntry
 import blueTable
 import redTable
+import playActionDisplay
 
 def deleteData(event):
     dataBase.clearData()
@@ -30,8 +31,10 @@ def createNewWindow(event):
     label.pack(fill='both', expand=True)
     
     #calls countdown timer upon window creation
-    countdownTimer(new_window, label, 5) #window, label, number to start countdown with
+    countdownTimer(new_window, label, 2) #window, label, number to start countdown with
 
+    #play_action_frame = customtkinter.CTkFrame(new_window, fg_color="transparent")
+    new_window.after(4000, lambda: playActionDisplay.createRedPlayerFrame(new_window, "Red Team", "#e23b4a", "#900A22"))
 
 def main_window():
     # Hide the splash screen
