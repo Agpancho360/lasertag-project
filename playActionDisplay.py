@@ -23,12 +23,12 @@ def createRedPlayerFrame(parent, team_name, background_color, border_color):
                 label = tkinter.Label(table_frame, text="")
                 label.grid(row=i + 2, column=j)
                 label.config(bg = background_color)
-        update_table()
+        update_table_red()
 
         return table_frame
 
 
-def update_table():
+def update_table_red():
     background_color = "#e23b4a"
     # Clear existing rows in the table
     for widget in table_frame.winfo_children():
