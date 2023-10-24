@@ -35,7 +35,8 @@ def createNewWindow(event):
 
     #add red and blue frames to the window
     new_window.after(4000, lambda: playActionDisplay.createRedPlayerFrame(new_window, "Red Team", "#e23b4a", "#900A22"))
-    #playActionDisplay.createBluePlayerFrame(new_window, "Red Team", "#e23b4a", "#900A22")
+     # Creates the blue player frame
+    playActionDisplay.createBluePlayerFrame(new_window, "Blue Team", "#61bbe7", "#0577ac")
 
 def main_window():
     # Hide the splash screen

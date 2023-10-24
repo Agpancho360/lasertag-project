@@ -61,7 +61,31 @@ def updateTableRed():
             label = tkinter.Label(table_frame, text=cell_data, font=("Arial", 10), fg ="whitesmoke")
             label.grid(row=i, column=j)
             label.config(bg = background_color)
-            
+     
+def createBluePlayerFrame(parent, team_name, background_color, border_color):
+    global blue_table_frame
+    blue_table_frame = tkinter.Frame(parent, bg=background_color, bd=5)
+    blue_table_frame.pack()
+    print("Blue Table frame created")
+    
+    # Create labels and place headers in the table
+    headers = ["Codename", "Player Score"]
+    for j, header in enumerate(headers):
+        label = tkinter.Label(blue_table_frame, text="5", font=("Impact", 15), fg="whitesmoke", background=background_color)
+        label.grid(row=1, column=j, padx=25, pady=15)
+        label.config(bg=background_color)
+        
+    # Create empty rows
+    num_empty_rows = 10
+    for i in range(num_empty_rows):
+        for j in range(2):
+            label = tkinter.Label(blue_table_frame, text="")
+            label.grid(row=i + 2, column=j)
+            label.config(bg=background_color)
+    updateTableBlue()
+
+    return blue_table_frame
+       
 def updateTableBlue():
     background_color = "#61bbe7"
     # Clear existing rows in the table
