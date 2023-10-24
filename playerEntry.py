@@ -1,4 +1,4 @@
-#plauerEntry.py
+#playerEntry.py
 import customtkinter
 import dataBase
 import redTable
