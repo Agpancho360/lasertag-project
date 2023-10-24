@@ -33,9 +33,9 @@ def createNewWindow(event):
     #calls countdown timer upon window creation
     countdownTimer(new_window, label, 5) #window, label, number to start countdown with
 
-    #play_action_frame = customtkinter.CTkFrame(new_window, fg_color="transparent")
+    #add red and blue frames to the window
     new_window.after(4000, lambda: playActionDisplay.createRedPlayerFrame(new_window, "Red Team", "#e23b4a", "#900A22"))
-    playActionDisplay.createBluePlayerFrame(new_window, "Red Team", "#e23b4a", "#900A22")
+    #playActionDisplay.createBluePlayerFrame(new_window, "Red Team", "#e23b4a", "#900A22")
 
 def main_window():
     # Hide the splash screen
