@@ -13,21 +13,21 @@ def createPlayerEntryFrame(parent,backgroundColor, borderWidth, borderColor):
     player_entry_frame.grid(row=0, column=0)
     # creates labels, entry, and button for player entry screen
     player_entry_label = customtkinter.CTkLabel(
-        player_entry_frame, text="Player Entry", font=("Impact", 25), text_color="whitesmoke")
+        player_entry_frame, text="Player Entry", font=("Haettenschweiler", 25), text_color="whitesmoke")
     first_name_label = customtkinter.CTkLabel(
-        player_entry_frame, text="First Name:", font=("Impact", 15), text_color="whitesmoke")
+        player_entry_frame, text="First Name:", font=("Haettenschweiler", 15), text_color="whitesmoke")
     first_name_entry = customtkinter.CTkEntry(
         player_entry_frame, placeholder_text="First Name")
     last_name_label = customtkinter.CTkLabel(
-        player_entry_frame, text="Last Name:", font=("Impact", 15), text_color="whitesmoke")
+        player_entry_frame, text="Last Name:", font=("Haettenschweiler", 15), text_color="whitesmoke")
     last_name_entry = customtkinter.CTkEntry(
         player_entry_frame, placeholder_text="Last Name")
     codename_label = customtkinter.CTkLabel(
-        player_entry_frame, text="Codename:", font=("Impact", 15), text_color="whitesmoke")
+        player_entry_frame, text="Codename:", font=("Haettenschweiler", 15), text_color="whitesmoke")
     codename_entry = customtkinter.CTkEntry(
         player_entry_frame, placeholder_text="Codename")
     team_label = customtkinter.CTkLabel(
-        player_entry_frame, text="Select Team:", font=("Impact", 15), text_color="whitesmoke")
+        player_entry_frame, text="Select Team:", font=("Haettenschweiler", 15), text_color="whitesmoke")
     team_entry = customtkinter.CTkOptionMenu(
         player_entry_frame, values=["Blue", "Red"])
     submitButton = customtkinter.CTkButton(
