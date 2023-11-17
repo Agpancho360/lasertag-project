@@ -20,13 +20,26 @@ while (True):
     print("Message from Client:{}".format(msgFromClient))
     print("Client IP Address: {}".format(clientAddress))
     print("----------------------------------")
+    
+    
+    # Simulate game logic
+    # For example, check for specific codes and take appropriate actions
+    if msgFromClient.decode('utf-8') == "53":
+        print("Code 53 received: Red base scored!")
+        # Implement your scoring logic for the red team
 
-    # sends message back to client
-    msgFromClientStr = msgFromClient.decode('utf-8')
-    msgFromServer = "Player " + msgFromClientStr + " has been confirmed: REPORTED"
-    bytesToSend = str.encode(msgFromServer)
-    server.sendto(bytesToSend, clientAddress)
+    elif msgFromClient.decode('utf-8') == "43":
+        print("Code 43 received: Green base scored!")
+        # Implement your scoring logic for the green team
+
+    else:
+        # sends message back to client
+        msgFromClientStr = msgFromClient.decode('utf-8')
+        msgFromServer = "Player " + msgFromClientStr + " has been confirmed: REPORTED"
+        bytesToSend = str.encode(msgFromServer)
+        server.sendto(bytesToSend, clientAddress)
 
 # # kills the server
 # if (msgFromClient.decode('utf-8') == "exit"):
 #     break
+

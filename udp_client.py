@@ -25,7 +25,13 @@ def sendMessage(msgFromClient):
 # while True:
 # gets equipment code
 
-
 # # kills the client
 # if (msgFromClient == "exit"):
 #     break
+
+# Simulate sending different codes based on game events
+# For example, sending code 53 to simulate the red base being scored
+# and sending code 43 to simulate the green base being scored
+# TRAFFIC GENERATOR WILL DO THIS
+# send_message("53")
+# send_message("43")
