@@ -6,12 +6,17 @@ import playerEntry
 import blueTable
 import redTable
 import playActionDisplay
+import pygame
 
 def deleteData(event):
     dataBase.clearData()
     redTable.update_table()
     blueTable.update_table()
-
+#sound sample is HERE
+def sound():
+    pygame.mixer.init()
+    pygame.mixer.music.load("./Track01.mp3")
+    pygame.mixer.music.play()
 def countdownTimer(new_window, label, count):
     #destroys window 1 second after zero
     if count < 0:
@@ -29,10 +34,11 @@ def createNewWindow(event):
     new_window.configure(bg = "black")
     label = tkinter.Label(new_window, text="5", font=("Impact", 45), fg = "whitesmoke", background = 'black')
     label.pack(fill='both', expand=True)
-    
+
     #calls countdown timer upon window creation
     timerCount = 30
     countdownTimer(new_window, label, timerCount) #window, label, number to start countdown with
+
 
     #add red and blue frames to the window
     new_window.after(timerCount * 1000 + 1000, lambda: playActionDisplay.createRedPlayerFrame(new_window, "Red Team", "#e23b4a", "#900A22"))
@@ -50,8 +56,9 @@ def main_window():
     root.grid_rowconfigure(0, weight=1)
     root.grid_columnconfigure(0, weight=1)
     root.bind("<F12>", deleteData)
-    root.bind("<F5>", createNewWindow) 
-
+    root.bind("<F5>", createNewWindow)
+    #play sound when the new window is created
+    sound()
     # creates left frame for playerEntryScreen
     left_frame = customtkinter.CTkFrame(root, fg_color="transparent")
     left_frame.grid(row=0, column=0)  # positions left frame to be to the left

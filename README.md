@@ -1,12 +1,13 @@
 # Title: Laser Tag Project - Team 13 "CTRL Freaks"
 
-## Description: This application is a scoreboard for Photon Lasertag. The application keeps track of player entries as well as the current running game score. The application is written in Python with TKINTER. 
+## Description: This application is a scoreboard for Photon Lasertag. The application keeps track of player entries as well as the current running game score. The application is written in Python with TKINTER.
 
 # Building the project
 
 1. Run this command in the terminal ```pip install supabase``` to download the supabase client
 2. Run this command in the terminal ```pip3 install customtkinter``` to download the UI library
-3. Run the following command to run the project
+3. 2. Run this command in the terminal ```pip install pygame``` to use sound
+4. Run the following command to run the project
    * For Window users
       * ```./starter.bat```
    * For Mac users
