@@ -6,7 +6,7 @@
 
 1. Run this command in the terminal ```pip install supabase``` to download the supabase client
 2. Run this command in the terminal ```pip3 install customtkinter``` to download the UI library
-3. 2. Run this command in the terminal ```pip install pygame``` to use sound
+3. Run this command in the terminal ```pip install pygame``` to use sound
 4. Run the following command to run the project
    * For Window users
       * ```./starter.bat```
