@@ -2,7 +2,7 @@
 import customtkinter
 import dataBase
 import redTable
-import blueTable
+import greenTable
 import playActionDisplay
 
 
@@ -29,7 +29,7 @@ def createPlayerEntryFrame(parent,backgroundColor, borderWidth, borderColor):
     team_label = customtkinter.CTkLabel(
         player_entry_frame, text="Select Team:", font=("Impact", 15), text_color="whitesmoke")
     team_entry = customtkinter.CTkOptionMenu(
-        player_entry_frame, values=["Blue", "Red"])
+        player_entry_frame, values=["Green", "Red"])
     submitButton = customtkinter.CTkButton(
         player_entry_frame, text="Submit", corner_radius=  25, command=add_player)
     # places items onto player entry screen
@@ -56,9 +56,9 @@ def add_player():
         if team == "Red":
             redTable.update_table()
             playActionDisplay.updateTableRed(playActionDisplay.redFrame)
-        elif team == "Blue":
-            blueTable.update_table()
-            playActionDisplay.updateTableBlue(playActionDisplay.blueFrame)
+        elif team == "Green":
+            greenTable.update_table()
+            playActionDisplay.updateTablegreen(playActionDisplay.greenFrame)
 
         # Clear the input fields
         first_name_entry.delete(0, customtkinter.END)

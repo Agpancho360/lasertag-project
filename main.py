@@ -3,7 +3,7 @@ import tkinter
 from tkinter import ttk
 import dataBase
 import playerEntry
-import blueTable
+import greenTable
 import redTable
 import playActionDisplay
 import pygame
@@ -11,7 +11,7 @@ import pygame
 def deleteData(event):
     dataBase.clearData()
     redTable.update_table()
-    blueTable.update_table()
+    greenTable.update_table()
 #sound sample is HERE
 def sound():
     pygame.mixer.init()
@@ -40,10 +40,10 @@ def createNewWindow(event):
     countdownTimer(new_window, label, timerCount) #window, label, number to start countdown with
 
 
-    #add red and blue frames to the window
+    #add red and Green frames to the window
     new_window.after(timerCount * 1000 + 1000, lambda: playActionDisplay.createRedPlayerFrame(new_window, "Red Team", "#e23b4a"))
-     # Creates the blue player frame
-    new_window.after(timerCount * 1000 + 1000, lambda: playActionDisplay.createBluePlayerFrame(new_window, "Blue Team", "#00CF06"))
+     # Creates the Green player frame
+    new_window.after(timerCount * 1000 + 1000, lambda: playActionDisplay.createGreenPlayerFrame(new_window, "Green Team", "#00CF06"))
 
 def main_window():
     # Hide the splash screen
@@ -64,10 +64,10 @@ def main_window():
     left_frame.grid(row=0, column=0)  # positions left frame to be to the left
     # playerEntryScreen
     playerEntry.createPlayerEntryFrame(left_frame, "#8d99ae", 5, "#2b2d42")
-    # creates right frame for red/blue table frames
+    # creates right frame for red/Green table frames
     right_frame = customtkinter.CTkFrame(root, fg_color="transparent")
     right_frame.grid(row=0, column=1)  # positions left frame to be to the left
-    blueTable.createBlueTableFrame(right_frame, "Blue Team", "#00CF06", "#05FF0D")
+    greenTable.createGreenTableFrame(right_frame, "Green Team", "#00CF06", "#05FF0D")
     redTable.createRedTableFrame(right_frame, "Red Team", "#e23b4a", "#900A22")
 
 # Create the splash screen

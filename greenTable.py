@@ -1,10 +1,10 @@
-#blueTable.py
+#greenTable.py
 import dataBase
 import customtkinter
 
-data = [list(row.values()) for row in dataBase.getBlueTeamData()]
+data = [list(row.values()) for row in dataBase.getGreenTeamData()]
 table_frame = None
-def createBlueTableFrame(parent, team_name, background_color, border_color):
+def createGreenTableFrame(parent, team_name, background_color, border_color):
         global table_frame
         table_frame = customtkinter.CTkFrame(parent, fg_color=background_color, border_width=5, border_color=border_color)
         table_frame.grid(row=0, column=1, padx=40, pady=40)
@@ -43,7 +43,7 @@ def update_table():
             label.grid(row=i + 2, column=j)
 
     # Get new data from the database
-    newData = [list(row.values()) for row in dataBase.getBlueTeamData()]
+    newData = [list(row.values()) for row in dataBase.getGreenTeamData()]
 
     # Add new data to the table
     for i, data_row in enumerate(newData, start=2):

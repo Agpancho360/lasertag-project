@@ -43,9 +43,9 @@ def getRedTeamData():
     return data[1]
 
 
-def getBlueTeamData():
+def getGreenTeamData():
     data, count = supabase.table('Player').select(
-        'ID, first_name, last_name, codename').eq('team', 'Blue').execute()
+        'ID, first_name, last_name, codename').eq('team', 'Green').execute()
     return data[1]
 
 def getRedPlayerData():
@@ -53,9 +53,9 @@ def getRedPlayerData():
         'codename, player_score').eq('team', 'Red').execute()
     return data[1]
 
-def getBluePlayerData():
+def getGreenPlayerData():
     data, count = supabase.table('Player').select(
-        'codename, player_score').eq('team', 'Blue').execute()
+        'codename, player_score').eq('team', 'Green').execute()
     return data[1]
 
 def clearData():
@@ -70,7 +70,7 @@ def clearData():
 #         'first_name': 'Kaden',
 #         'last_name': 'Ramirez',
 #         'codename': 'Eagleye',  # must be unique
-#         'team': 'Red',  # must be Red or Blue (case sensitive)
+#         'team': 'Red',  # must be Red or Green (case sensitive)
 #         'equipment_ID': 100  # must be unique
 #     },
 #     {
@@ -78,12 +78,12 @@ def clearData():
 #         'first_name': 'Alex',
 #         'last_name': 'Guzman',
 #         'codename': 'Thunder_Lips',  # must be unique
-#         'team': 'Blue',  # must be Red or Blue (case sensitive)
+#         'team': 'Green',  # must be Red or Green (case sensitive)
 #         'equipment_ID': 101  # must be unique
 #     },
 # ]
 
-# player = Player('Alex', 'Tavaraz', 'Uknown', 'Blue') # creates player with these attributes
+# player = Player('Alex', 'Tavaraz', 'Uknown', 'Green') # creates player with these attributes
 # player.insertPlayer() # inserts the created player into the Player table in the database
 
 # prints all the data in the 'Player' table
