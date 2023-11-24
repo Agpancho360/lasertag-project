@@ -3,7 +3,7 @@ import tkinter
 
 data = [list(row.values()) for row in dataBase.getRedPlayerData()]
 table_frame =None
-def createRedPlayerFrame(parent, team_name, background_color, border_color):
+def createRedPlayerFrame(parent, team_name, background_color):
         global redFrame
         redFrame = tkinter.Frame(parent, bg=background_color, bd=5)
         redFrame.pack(side = "left")
@@ -56,7 +56,7 @@ def updateTableRed(redFrame):
             label.grid(row=i, column=j)
             label.config(bg = background_color)
      
-def createBluePlayerFrame(parent, team_name, background_color, border_color):
+def createBluePlayerFrame(parent, team_name, background_color):
     global blueFrame
     blueFrame = tkinter.Frame(parent, bg=background_color, bd=5)
     blueFrame.pack(side = "right")
@@ -74,7 +74,7 @@ def createBluePlayerFrame(parent, team_name, background_color, border_color):
     return blueFrame
        
 def updateTableBlue(blueFrame):
-    background_color = "#61bbe7"
+    background_color = "#00CF06"
     # Clear existing rows in the table
     for widget in blueFrame.winfo_children():
         widget.destroy()

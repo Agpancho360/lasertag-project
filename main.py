@@ -30,7 +30,7 @@ def countdownTimer(new_window, label, count):
 def createNewWindow(event):
     new_window = tkinter.Toplevel()
     new_window.title("Play Action Screen")
-    new_window.geometry("800x600")
+    new_window.attributes('-fullscreen', True)
     new_window.configure(bg = "black")
     label = tkinter.Label(new_window, text="5", font=("Impact", 45), fg = "whitesmoke", background = 'black')
     label.pack(fill='both', expand=True)
@@ -41,9 +41,9 @@ def createNewWindow(event):
 
 
     #add red and blue frames to the window
-    new_window.after(timerCount * 1000 + 1000, lambda: playActionDisplay.createRedPlayerFrame(new_window, "Red Team", "#e23b4a", "#900A22"))
+    new_window.after(timerCount * 1000 + 1000, lambda: playActionDisplay.createRedPlayerFrame(new_window, "Red Team", "#e23b4a"))
      # Creates the blue player frame
-    new_window.after(timerCount * 1000 + 1000, lambda: playActionDisplay.createBluePlayerFrame(new_window, "Blue Team", "#61bbe7", "#0577ac"))
+    new_window.after(timerCount * 1000 + 1000, lambda: playActionDisplay.createBluePlayerFrame(new_window, "Blue Team", "#00CF06"))
 
 def main_window():
     # Hide the splash screen
@@ -67,7 +67,7 @@ def main_window():
     # creates right frame for red/blue table frames
     right_frame = customtkinter.CTkFrame(root, fg_color="transparent")
     right_frame.grid(row=0, column=1)  # positions left frame to be to the left
-    blueTable.createBlueTableFrame(right_frame, "Blue Team", "#61bbe7", "#0577ac")
+    blueTable.createBlueTableFrame(right_frame, "Blue Team", "#00CF06", "#05FF0D")
     redTable.createRedTableFrame(right_frame, "Red Team", "#e23b4a", "#900A22")
 
 # Create the splash screen
