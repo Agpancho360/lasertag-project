@@ -36,7 +36,7 @@ def createNewWindow(event):
     label.pack(fill='both', expand=True)
 
     #calls countdown timer upon window creation
-    timerCount = 30
+    timerCount = 2
     countdownTimer(new_window, label, timerCount) #window, label, number to start countdown with
 
 
