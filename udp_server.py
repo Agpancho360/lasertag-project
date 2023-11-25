@@ -1,6 +1,6 @@
 import socket
 
-serverPort = 7501
+serverPort = 7502
 clientPort = 7500
 serverAddressPort = ("127.0.0.1")  # destination
 bufferSize = 1024  # message transmission size

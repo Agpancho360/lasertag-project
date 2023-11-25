@@ -1,8 +1,11 @@
 import socket
 
-serverPort = 7501
+serverPort = 7502
 clientPort = 7500
+testPort = 7504
+testAddressPort = ("127.0.0.1", testPort)
 serverAddressPort = ("127.0.0.1", serverPort)  # original server
+trafficGeneratorPort = ("127.0.0.1", 7501)
 bufferSize = 1024  # message transmission size
 
 client = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
@@ -25,9 +28,17 @@ def forwardMessage(msgFromClient, targetServerAddress):
 while True:
     # Receive message from a different server
     data, serverAddress = client.recvfrom(bufferSize)
-    msgFromOtherServer = data.decode()
-    print("Message from Server: {}".format(msgFromOtherServer))
-    # forwardMessage(msgFromOtherServer, serverAddressPort)
+    msg = data.decode()
+    print("Message from Server: {}".format(msg))
+    print(serverAddress)
+    if((serverAddress != testAddressPort) and (serverAddress != serverAddressPort)):
+        forwardMessage(msg, serverAddressPort)
+    elif(serverAddress == testAddressPort):
+        forwardMessage(msg, trafficGeneratorPort)
+    else:
+        print(msg)
+        # forwardMessage(msg, serverAddressPort)
+        #forwardMessage(serverAddressPort)
 
     # You can add more logic here based on the received message if needed
 
