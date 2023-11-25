@@ -27,11 +27,9 @@ while (True):
     if msgFromClient.decode('utf-8') == "53":
         print("Code 53 received: Red base scored!")
         # Implement your scoring logic for the red team
-
     elif msgFromClient.decode('utf-8') == "43":
         print("Code 43 received: Green base scored!")
         # Implement your scoring logic for the green team
-
     else:
         # sends message back to client
         msgFromClientStr = msgFromClient.decode('utf-8')

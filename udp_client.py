@@ -31,7 +31,7 @@ while True:
     msg = data.decode()
     print("Message from Server: {}".format(msg))
     print(serverAddress)
-    if((serverAddress != testAddressPort) and (serverAddress != serverAddressPort)):
+    if(((serverAddress != testAddressPort) and (serverAddress != serverAddressPort)) or (msg == '53') or (msg == '43')):
         forwardMessage(msg, serverAddressPort)
     elif(serverAddress == testAddressPort):
         forwardMessage(msg, trafficGeneratorPort)

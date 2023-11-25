@@ -18,10 +18,13 @@ def sendCodesLoop():
     UDPClientSocketTransmit.bind(testPort)
     msg1 = str(202)
     msg2 = str(221)
+    msg3 = str(53)
     i = 0
-    while(i<=20):
-        if(i<20):
+    while(i<=10):
+        if(i<5):
             UDPClientSocketTransmit.sendto(str.encode(str(msg1)), clientAddressPort)
+        elif(10>i>=5):
+            UDPClientSocketTransmit.sendto(str.encode(str(msg3)), clientAddressPort)
         else:
             UDPClientSocketTransmit.sendto(str.encode(str(msg2)), clientAddressPort)
         time.sleep(3)
