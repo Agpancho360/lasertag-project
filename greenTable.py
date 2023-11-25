@@ -15,7 +15,7 @@ def createGreenTableFrame(parent, team_name, background_color, border_color):
                 "Impact", 15), text_color="whitesmoke")
             label.grid(row=1, column=j, padx=25, pady=15)
         # Create empty rows
-        num_empty_rows = 16
+        num_empty_rows = dataBase.getGreenTeamCount() + 1
         for i in range(num_empty_rows):
             for j in range(4):
                 label = customtkinter.CTkLabel(table_frame, text="")
@@ -36,7 +36,7 @@ def update_table():
         label.grid(row=1, column=j, padx=25, pady=15)
         
     #creates empty entries
-    num_empty_rows = 16
+    num_empty_rows = dataBase.getGreenTeamCount() + 1
     for i in range(num_empty_rows):
         for j in range(4):
             label = customtkinter.CTkLabel(table_frame, text="")

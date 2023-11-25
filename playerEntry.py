@@ -62,9 +62,10 @@ def add_player():
                 greenTable.update_table()
                 playActionDisplay.updateTablegreen(playActionDisplay.greenFrame)
 
-            # Clear the input fields
-            first_name_entry.delete(0, customtkinter.END)
-            last_name_entry.delete(0,customtkinter.END)
-            codename_entry.delete(0, customtkinter.END)
         else:
-             print('There are already 15 playrs on this team')
+             print('There are already 15 players on this team')
+
+            # Clear the input fields
+        first_name_entry.delete(0, customtkinter.END)
+        last_name_entry.delete(0,customtkinter.END)
+        codename_entry.delete(0, customtkinter.END)
