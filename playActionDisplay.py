@@ -29,7 +29,7 @@ def updateTableRed(redFrame):
         widget.destroy()
 
     # Create Team Score
-    teamScore = tkinter.Label(redFrame, text="Red Team Score: " + "0 ", font=("Impact", 15), fg ="whitesmoke")
+    teamScore = tkinter.Label(redFrame, text="Red Team Score: " + str(dataBase.getRedTeamScore()), font=("Impact", 15), fg ="whitesmoke")
     teamScore.grid(row = 0, column = 0, padx= 25, pady=25)
     teamScore.config(bg = background_color)
 
@@ -80,7 +80,7 @@ def updateTableGreen(greenFrame):
         widget.destroy()
 
     # Create Team Score
-    team_score = tkinter.Label(greenFrame, text="Green Team Score: " + "0 ", font=("Impact", 15), fg="whitesmoke")
+    team_score = tkinter.Label(greenFrame, text="Green Team Score: " + str(dataBase.getGreenTeamScore()), font=("Impact", 15), fg="whitesmoke")
     team_score.grid(row=0, column=0, padx=25, pady=25)
     team_score.config(bg=background_color)
 

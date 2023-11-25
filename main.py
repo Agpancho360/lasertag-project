@@ -87,6 +87,7 @@ def main_window():
     right_frame.grid(row=0, column=1)  # positions left frame to be to the left
     greenTable.createGreenTableFrame(right_frame, "Green Team", "#00CF06", "#05FF0D")
     redTable.createRedTableFrame(right_frame, "Red Team", "#e23b4a", "#900A22")
+    dataBase.getRedTeamScore()
 
 # Create the splash screen
 splash_root = tkinter.Tk()

@@ -43,6 +43,18 @@ class Player:
         # udp_client.sendMessage(msgFromClient)
 
 
+def getRedTeamScore():
+    response = supabase.table('Teams').select('score').eq('team', 'Red').execute()
+    score = response.data
+    score_value = score[0]['score']
+    return score_value
+
+def getGreenTeamScore():
+    response = supabase.table('Teams').select('score').eq('team', 'Green').execute()
+    score = response.data
+    score_value = score[0]['score']
+    return score_value
+
 def getRedTeamCount():
     data, count = supabase.table('Player').select('*', count='exact').eq('team', 'Red').execute()
     return len(data[1])
@@ -55,7 +67,6 @@ def getRedTeamData():
     data, count = supabase.table('Player').select(
         'ID, first_name, last_name, codename').eq('team', 'Red').execute()
     return data[1]
-
 
 def getGreenTeamData():
     data, count = supabase.table('Player').select(
