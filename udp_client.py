@@ -29,8 +29,8 @@ while True:
     # Receive message from a different server
     data, serverAddress = client.recvfrom(bufferSize)
     msg = data.decode()
-    print("Message from Server: {}".format(msg))
-    print(serverAddress)
+    # print("Message from Server: {}".format(msg))
+    # print(serverAddress)
     if(((serverAddress != testAddressPort) and (serverAddress != serverAddressPort)) or (msg == '53') or (msg == '43')):
         forwardMessage(msg, serverAddressPort)
     elif(serverAddress == testAddressPort):
