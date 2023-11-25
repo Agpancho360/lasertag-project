@@ -7,6 +7,24 @@ import greenTable
 import redTable
 import playActionDisplay
 import pygame
+import socket
+import time
+
+
+def sendCodesLoop():
+    clientAddressPort   = ("127.0.0.1", 7501)
+    UDPClientSocketTransmit = socket.socket(family=socket.AF_INET, type=socket.SOCK_DGRAM)
+    msg1 = str(202)
+    msg2 = str(221)
+    i = 0
+    while(i<=20):
+        if(i<20):
+            UDPClientSocketTransmit.sendto(str.encode(str(msg1)), clientAddressPort)
+        else:
+            UDPClientSocketTransmit.sendto(str.encode(str(msg2)), clientAddressPort)
+        time.sleep(3)
+        i += 1
+
 
 def deleteData(event):
     dataBase.clearData()
@@ -39,11 +57,11 @@ def createNewWindow(event):
     timerCount = 2
     countdownTimer(new_window, label, timerCount) #window, label, number to start countdown with
 
-
     #add red and Green frames to the window
     new_window.after(timerCount * 1000 + 1000, lambda: playActionDisplay.createRedPlayerFrame(new_window, "Red Team", "#e23b4a"))
      # Creates the Green player frame
     new_window.after(timerCount * 1000 + 1000, lambda: playActionDisplay.createGreenPlayerFrame(new_window, "Green Team", "#00CF06"))
+    new_window.after((timerCount+ 5) * 1000, sendCodesLoop)
 
 def main_window():
     # Hide the splash screen

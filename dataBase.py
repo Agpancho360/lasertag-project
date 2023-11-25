@@ -1,11 +1,16 @@
 import os
 from supabase import create_client
-import udp_client
+# import udp_client
+import socket
+
 
 # setupt to get into the project database
 SUPABASE_URL = 'https://qjqnfmauqqdjpppdlrdq.supabase.co'
 SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFqcW5mbWF1cXFkanBwcGRscmRxIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTY5Mzk0MjMzNSwiZXhwIjoyMDA5NTE4MzM1fQ.C9GRRux8dixBbjh_nEHhyZotMqhXSn6OY0BEbmcGyik'
 supabase = create_client(SUPABASE_URL, SUPABASE_KEY)
+
+clientAddressPort   = ("127.0.0.1", 7500)
+UDPClientSocketTransmit = socket.socket(family=socket.AF_INET, type=socket.SOCK_DGRAM)
 
 
 class Player:
@@ -33,8 +38,9 @@ class Player:
                 'team': self.team,
                 'equipment_ID': self.equipment_ID}
         supabase.table('Player').insert(data).execute()
-        msgFromClient = str(self.equipment_ID)
-        udp_client.sendMessage(msgFromClient)
+        msg = str(self.equipment_ID)
+        UDPClientSocketTransmit.sendto(str.encode(str(msg)), clientAddressPort)
+        # udp_client.sendMessage(msgFromClient)
 
 
 def getRedTeamData():
