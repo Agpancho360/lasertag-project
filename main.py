@@ -91,7 +91,8 @@ def main_window():
 # Create the splash screen
 splash_root = tkinter.Tk()
 splash_root.title("Laser Tag Game")
-splash_root.geometry("700x700")
+splash_root.attributes('-fullscreen', True)
+splash_root.configure(bg = "black")
 # Load and display an image on the splash screen
 img = tkinter.PhotoImage(file="logo.png")
 img = img.subsample(img.width() // 700, img.height() // 700)
