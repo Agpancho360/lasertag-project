@@ -10,8 +10,12 @@ import pygame
 import socket
 import time
 
+def updateTables():
+    print("Updating tables...")
+    playActionDisplay.updateTableGreen(playActionDisplay.greenFrame)
+    playActionDisplay.updateTableRed(playActionDisplay.redFrame)
 
-def sendCodesLoop():
+def sendCodesLoop(window):
     clientAddressPort = ("127.0.0.1", 7500)
     testPort = ("127.0.0.1", 7504)
     UDPClientSocketTransmit = socket.socket(family=socket.AF_INET, type=socket.SOCK_DGRAM)
@@ -20,14 +24,15 @@ def sendCodesLoop():
     msg2 = str(221)
     msg3 = str(53)
     i = 0
-    while(i<=10):
+    while(i<=30):
         if(i<5):
             UDPClientSocketTransmit.sendto(str.encode(str(msg1)), clientAddressPort)
-        elif(10>i>=5):
+        elif(30>i>=5):
             UDPClientSocketTransmit.sendto(str.encode(str(msg3)), clientAddressPort)
         else:
             UDPClientSocketTransmit.sendto(str.encode(str(msg2)), clientAddressPort)
-        time.sleep(3)
+        window.after(1000, updateTables)
+        window.after(1000, window.update_idletasks)
         i += 1
 
 
@@ -66,7 +71,8 @@ def createNewWindow(event):
     new_window.after(timerCount * 1000 + 1000, lambda: playActionDisplay.createRedPlayerFrame(new_window, "Red Team", "#e23b4a"))
      # Creates the Green player frame
     new_window.after(timerCount * 1000 + 1000, lambda: playActionDisplay.createGreenPlayerFrame(new_window, "Green Team", "#00CF06"))
-    new_window.after((timerCount+ 5) * 1000, sendCodesLoop)
+    new_window.after((timerCount + 15) * 1000, lambda: sendCodesLoop(new_window))
+    new_window.after(1000, lambda: new_window.update_idletasks) #try adding a loop here and getting rid of a loop in the sendCodesLoopFunction
 
 def main_window():
     # Hide the splash screen

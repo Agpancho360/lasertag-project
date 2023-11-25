@@ -2,7 +2,7 @@ import dataBase
 import tkinter
 
 data = [list(row.values()) for row in dataBase.getRedPlayerData()]
-table_frame =None
+
 def createRedPlayerFrame(parent, team_name, background_color):
         global redFrame
         redFrame = tkinter.Frame(parent, bg=background_color, bd=5)
@@ -11,7 +11,7 @@ def createRedPlayerFrame(parent, team_name, background_color):
         print("Table frame created")
         
         # Create empty rows
-        num_empty_rows = 10
+        num_empty_rows = dataBase.getRedTeamCount() + 1
         for i in range(num_empty_rows):
             for j in range(2):
                 label = tkinter.Label(redFrame, text="")
@@ -40,7 +40,7 @@ def updateTableRed(redFrame):
         label.grid(row=1, column=j, padx=25, pady=15)
         label.config(bg = background_color)
 
-    num_empty_rows = 10
+    num_empty_rows = dataBase.getRedTeamCount() + 1
     for i in range(num_empty_rows):
         for j in range(2):
             label = tkinter.Label(redFrame, text="")
@@ -63,7 +63,7 @@ def createGreenPlayerFrame(parent, team_name, background_color):
     print("Green Table frame created")
         
     # Create empty rows
-    num_empty_rows = 10
+    num_empty_rows = dataBase.getGreenTeamCount() + 1
     for i in range(num_empty_rows):
         for j in range(2):
             label = tkinter.Label(greenFrame, text="")
@@ -91,7 +91,7 @@ def updateTableGreen(greenFrame):
         label.grid(row=1, column=j, padx=25, pady=15)
         label.config(bg=background_color)
 
-    num_empty_rows = 10
+    num_empty_rows = dataBase.getGreenTeamCount() + 1
     for i in range(num_empty_rows):
         for j in range(2):
             label = tkinter.Label(greenFrame, text="")

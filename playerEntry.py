@@ -60,7 +60,7 @@ def add_player():
             playActionDisplay.updateTableRed(playActionDisplay.redFrame)
         elif team == "Green":
             greenTable.update_table()
-            playActionDisplay.updateTablegreen(playActionDisplay.greenFrame)
+            playActionDisplay.updateTableGreen(playActionDisplay.greenFrame)
 
     else:
         print('There are already 15 players on this team')

@@ -29,18 +29,20 @@ while (True):
     
     # Simulate game logic
     # For example, check for specific codes and take appropriate actions
+    import playActionDisplay
+
     if msgFromClient.decode('utf-8') == "53":
         print("Code 53 received: Red base scored!")
-        minimum = dataBase.getMinimumIDGreen()
-        maximum = dataBase.getGreenTeamCount()
-        dataBase.updatePlayerScore(random.randint(minimum, maximum), 100)
+        randomGreenPlayer = dataBase.getRandomGreenPlayer()
+        dataBase.updatePlayerScore(randomGreenPlayer, 100)
+        # playActionDisplay.updateTableGreen(playActionDisplay.greenFrame)
+        #update code to correctly select from someone that is red or green
         # Implement your scoring logic for the red team
     elif msgFromClient.decode('utf-8') == "43":
         print("Code 43 received: Green base scored!")
-        minimum = dataBase.getMinimumIDRED()
-        maximum = dataBase.getRedTeamCount()
-        dataBase.updatePlayerScore(random.randint(minimum, maximum), 100)
-
+        randomRedPlayer = dataBase.getRandomRedPlayer()
+        dataBase.updatePlayerScore(randomRedPlayer, 100)
+        # playActionDisplay.updateTableRed(playActionDisplay.redFrame)
         # Implement your scoring logic for the green team
     else:
         # sends message back to client

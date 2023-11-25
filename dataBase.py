@@ -2,6 +2,7 @@ import os
 from supabase import create_client
 # import udp_client
 import socket
+import random
 
 
 # setupt to get into the project database
@@ -41,6 +42,20 @@ class Player:
         msg = str(self.equipment_ID)
         UDPClientSocketTransmit.sendto(str.encode(str(msg)), clientAddressPort)
         # udp_client.sendMessage(msgFromClient)
+
+def getRandomGreenPlayer():
+    response = supabase.table('Player').select('*').eq('team', 'Green').execute()
+    result = response.data
+    length = len(result)
+    random_number = result[random.randint(1, length-1)]['ID']
+    return random_number
+
+def getRandomRedPlayer():
+    response = supabase.table('Player').select('*').eq('team', 'Red').execute()
+    result = response.data
+    length = len(result)
+    random_number = result[random.randint(1, length-1)]['ID']
+    return random_number
 
 def updatePlayerScore(id, pointsToAdd):
     response = supabase.table('Player').select('player_score').eq('ID', id).execute()
