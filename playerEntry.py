@@ -47,25 +47,25 @@ def createPlayerEntryFrame(parent,backgroundColor, borderWidth, borderColor):
     return player_entry_frame
 def add_player():
         
-        team = team_entry.get()
-        if((int(dataBase.getRedTeamCount()) < 15 and team == 'Red') or (int(dataBase.getGreenTeamCount()) < 15 and team == 'Green')):
-            first_name = first_name_entry.get()
-            last_name = last_name_entry.get()
-            codename = codename_entry.get()
-            # Create a Player object and insert it into the database
-            player = dataBase.Player(first_name, last_name, codename, team)
-            player.insertPlayer()
-            if team == "Red":
-                redTable.update_table()
-                playActionDisplay.updateTableRed(playActionDisplay.redFrame)
-            elif team == "Green":
-                greenTable.update_table()
-                playActionDisplay.updateTablegreen(playActionDisplay.greenFrame)
+    team = team_entry.get()
+    if((int(dataBase.getRedTeamCount()) < 15 and team == 'Red') or (int(dataBase.getGreenTeamCount()) < 15 and team == 'Green')):
+        first_name = first_name_entry.get()
+        last_name = last_name_entry.get()
+        codename = codename_entry.get()
+        # Create a Player object and insert it into the database
+        player = dataBase.Player(first_name, last_name, codename, team)
+        player.insertPlayer()
+        if team == "Red":
+            redTable.update_table()
+            playActionDisplay.updateTableRed(playActionDisplay.redFrame)
+        elif team == "Green":
+            greenTable.update_table()
+            playActionDisplay.updateTablegreen(playActionDisplay.greenFrame)
 
-        else:
-             print('There are already 15 players on this team')
+    else:
+        print('There are already 15 players on this team')
 
-            # Clear the input fields
-        first_name_entry.delete(0, customtkinter.END)
-        last_name_entry.delete(0,customtkinter.END)
-        codename_entry.delete(0, customtkinter.END)
+    # Clear the input fields
+    first_name_entry.delete(0, customtkinter.END)
+    last_name_entry.delete(0,customtkinter.END)
+    codename_entry.delete(0, customtkinter.END)
