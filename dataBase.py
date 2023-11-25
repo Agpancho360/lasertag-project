@@ -42,6 +42,23 @@ class Player:
         UDPClientSocketTransmit.sendto(str.encode(str(msg)), clientAddressPort)
         # udp_client.sendMessage(msgFromClient)
 
+def updatePlayerScore(id, pointsToAdd):
+    response = supabase.table('Player').select('player_score').eq('ID', id).execute()
+    score = response.data
+    player_score = score[0]['player_score']
+    supabase.table('Player').update({'player_score' : str((int(player_score) + pointsToAdd))}).eq('ID', id).execute()
+
+def getMinimumIDRED():
+    response = supabase.from_('Player').select('ID').eq('team', 'Red').order('ID').limit(1).execute()
+    min = response.data
+    min_id = min[0]['ID']
+    return min_id
+     
+def getMinimumIDGreen():
+    response = supabase.from_('Player').select('ID').eq('team', 'Green').order('ID').limit(1).execute()
+    min = response.data
+    min_id = min[0]['ID']
+    return min_id
 
 def getRedTeamScore():
     response = supabase.table('Teams').select('score').eq('team', 'Red').execute()
