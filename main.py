@@ -33,12 +33,15 @@ def sendCodesLoop(window, i=0):
         if(i < 5):
             UDPClientSocketTransmit.sendto(
                 str.encode(str(msg1)), clientAddressPort)
-        elif(21 > i >= 5):
+        elif(7 > i >= 5):
             UDPClientSocketTransmit.sendto(
                 str.encode(str(msg3)), clientAddressPort)
-        elif(30 >= i >= 21):
+        elif(9 > i >= 7):
             UDPClientSocketTransmit.sendto(
                 str.encode(str(msg4)), clientAddressPort)
+        elif(30 >= i >= 9):
+            UDPClientSocketTransmit.sendto(
+                str.encode(str(msg1)), clientAddressPort)
         else:
             UDPClientSocketTransmit.sendto(
                 str.encode(str(msg2)), clientAddressPort)
