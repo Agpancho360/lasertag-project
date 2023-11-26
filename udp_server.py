@@ -1,6 +1,5 @@
 import socket
-import random
-import dataBase
+import dataBase 
 
 serverPort = 7502
 clientPort = 7500
@@ -32,20 +31,21 @@ while (True):
     import playActionDisplay
 
     if msgFromClient.decode('utf-8') == "53":
-        print("Code 53 received: Red base scored!")
+        print("Code 53 received: Red base scored on!")
         randomGreenPlayer = dataBase.getRandomGreenPlayer()
         dataBase.updatePlayerScore(randomGreenPlayer, 100)
+        dataBase.updateEventString("Red base scored on by Player " + dataBase.getPlayerName(randomGreenPlayer))
         # playActionDisplay.updateTableGreen(playActionDisplay.greenFrame)
         #update code to correctly select from someone that is red or green
         # Implement your scoring logic for the red team
     elif msgFromClient.decode('utf-8') == "43":
-        print("Code 43 received: Green base scored!")
+        print("Code 43 received: Green base scored on!")
         randomRedPlayer = dataBase.getRandomRedPlayer()
         dataBase.updatePlayerScore(randomRedPlayer, 100)
+        dataBase.updateEventString("Green base scored on by Player " + dataBase.getPlayerName(randomRedPlayer))
         # playActionDisplay.updateTableRed(playActionDisplay.redFrame)
         # Implement your scoring logic for the green team
     else:
-        print('this is running')
         msgFromClientStr = msgFromClient.decode('utf-8')
         try:
             # Split the input string at the colon
@@ -57,6 +57,8 @@ while (True):
 
             #update Player score
             dataBase.updatePlayerScore(int(player_1), 10)
+            dataBase.updateEventString("Player " + dataBase.getPlayerName(player_1) + " hit " + "Player " + dataBase.getPlayerName(player_2))
+            
         except ValueError:
             print("That code is not recognized.")
 

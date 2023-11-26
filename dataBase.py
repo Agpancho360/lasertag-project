@@ -43,6 +43,21 @@ class Player:
         UDPClientSocketTransmit.sendto(str.encode(str(msg)), clientAddressPort)
         # udp_client.sendMessage(msgFromClient)
 
+def getPlayerName(id):
+    response = supabase.table('Player').select('codename').eq('ID', id).execute()
+    name = response.data
+    codename = name[0]['codename']
+    return str(codename)
+
+def updateEventString(str):
+    supabase.table('Event Table').update({'string' : str }).eq('ID', 1).execute()
+
+def getEventString():
+    response = supabase.table('Event Table').select('*').eq('ID', 1).execute()
+    query = response.data
+    string = query[0]['string']
+    return str(string)
+
 def getRandomGreenPlayer():
     response = supabase.table('Player').select('*').eq('team', 'Green').execute()
     result = response.data

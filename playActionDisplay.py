@@ -98,3 +98,35 @@ def updateTableGreen(greenFrame):
             label = tkinter.Label(greenFrame, text=cell_data, font=("Arial", 10), fg="whitesmoke")
             label.grid(row=i, column=j)
             label.config(bg=background_color)
+
+def createEventFrame(parent, title, background_color):
+    global event_frame
+    event_frame = tkinter.Frame(parent, bg=background_color, bd=5)
+
+    # Create a Text widget for displaying information
+    info_text = tkinter.Text(event_frame, height=10, width=40, font=("Arial", 10), wrap="word", bg=background_color, state='disabled')
+    info_text.pack(pady=10, expand=True)
+
+    # Center the frame using place
+    event_frame.place(relx=0.5, rely=0.5, anchor="center")
+
+    return event_frame
+
+def updateInfo(new_info):
+    global event_frame
+    # Get the Text widget from the event frame
+    info_text = event_frame.winfo_children()[0]
+
+    # Set the state to normal, insert new information, and set it back to disabled
+    info_text.config(state='normal')
+    info_text.insert(tkinter.END, new_info + "\n")
+    info_text.config(state='disabled')
+
+    # Scroll to the end to show the latest information
+    info_text.see(tkinter.END)
+
+
+
+
+
+

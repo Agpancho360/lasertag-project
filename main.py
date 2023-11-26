@@ -15,6 +15,7 @@ def updateTables():
     print("Updating tables...")
     playActionDisplay.updateTableGreen(playActionDisplay.greenFrame)
     playActionDisplay.updateTableRed(playActionDisplay.redFrame)
+    playActionDisplay.updateInfo(dataBase.getEventString())
 
 
 def sendCodesLoop(window, i=0):
@@ -112,10 +113,15 @@ def playSoundAndCreateWindow(event):
     # Creates the Green player frame
     new_window.after(timerCount * 1000 + 1000,
                      lambda: playActionDisplay.createGreenPlayerFrame(new_window, "Green Team", "#00CF06"))
+
+    new_window.after(timerCount * 1000 + 1000,
+                     lambda: playActionDisplay.createEventFrame(new_window, "Events", "#051ffa"))
+
     new_window.after((timerCount + 15) * 1000,
                      lambda: sendCodesLoop(new_window))
-    # try adding a loop here and getting rid of a loop in the sendCodesLoopFunction
+    
     new_window.after(1000, lambda: new_window.update_idletasks)
+
 
 
 def main_window():
