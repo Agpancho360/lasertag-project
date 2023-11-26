@@ -45,8 +45,23 @@ while (True):
         # playActionDisplay.updateTableRed(playActionDisplay.redFrame)
         # Implement your scoring logic for the green team
     else:
-        # sends message back to client
+        print('this is running')
         msgFromClientStr = msgFromClient.decode('utf-8')
+        try:
+            # Split the input string at the colon
+            numbers = msgFromClientStr.split(":")
+
+            # Extract the numbers
+            player_1 = numbers[0]
+            player_2 = numbers[1]
+
+            #update Player score
+            dataBase.updatePlayerScore(int(player_1), 10)
+        except ValueError:
+            print("That code is not recognized.")
+
+
+        # sends message back to client
         msgFromServer = "Player " + msgFromClientStr + " has been confirmed: REPORTED"
         bytesToSend = str.encode(msgFromServer)
         server.sendto(bytesToSend, clientAddress)
