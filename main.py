@@ -17,29 +17,32 @@ def updateTables():
     playActionDisplay.updateTableRed(playActionDisplay.redFrame)
 
 
-def sendCodesLoop(window):
-    clientAddressPort = ("127.0.0.1", 7500)
-    testPort = ("127.0.0.1", 7504)
-    UDPClientSocketTransmit = socket.socket(
-        family=socket.AF_INET, type=socket.SOCK_DGRAM)
-    UDPClientSocketTransmit.bind(testPort)
-    msg1 = str(202)
-    msg2 = str(221)
-    msg3 = str(53)
-    i = 0
-    while (i <= 30):
-        if (i < 5):
+def sendCodesLoop(window, i=0):
+    if i <= 30:
+        clientAddressPort = ("127.0.0.1", 7500)
+        testPort = ("127.0.0.1", 7504)
+        UDPClientSocketTransmit = socket.socket(
+            family=socket.AF_INET, type=socket.SOCK_DGRAM)
+        UDPClientSocketTransmit.bind(testPort)
+        msg1 = str(202)
+        msg2 = str(221)
+        msg3 = str(53)
+
+        if i < 5:
             UDPClientSocketTransmit.sendto(
                 str.encode(str(msg1)), clientAddressPort)
-        elif (30 > i >= 5):
+        elif 30 > i >= 5:
             UDPClientSocketTransmit.sendto(
                 str.encode(str(msg3)), clientAddressPort)
         else:
             UDPClientSocketTransmit.sendto(
                 str.encode(str(msg2)), clientAddressPort)
+
         window.after(1000, updateTables)
-        window.after(1000, window.update_idletasks)
-        i += 1
+
+        # Schedule the next iteration of sendCodesLoop
+        window.after(1000, sendCodesLoop, window, i + 1)
+
 
 
 def deleteData(event):
