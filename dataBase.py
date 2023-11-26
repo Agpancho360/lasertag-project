@@ -68,7 +68,7 @@ def getMinimumIDRED():
     min = response.data
     min_id = min[0]['ID']
     return min_id
-     
+
 def getMinimumIDGreen():
     response = supabase.from_('Player').select('ID').eq('team', 'Green').order('ID').limit(1).execute()
     min = response.data
@@ -76,16 +76,14 @@ def getMinimumIDGreen():
     return min_id
 
 def getRedTeamScore():
-    response = supabase.table('Teams').select('score').eq('team', 'Red').execute()
-    score = response.data
-    score_value = score[0]['score']
-    return score_value
+    data, count = supabase.table('Player').select('player_score').eq('team', 'Red').execute()
+    red_team_score = sum(entry['player_score'] for entry in data[1])
+    return red_team_score
 
 def getGreenTeamScore():
-    response = supabase.table('Teams').select('score').eq('team', 'Green').execute()
-    score = response.data
-    score_value = score[0]['score']
-    return score_value
+    data, count = supabase.table('Player').select('player_score').eq('team', 'Green').execute()
+    green_team_score = sum(entry['player_score'] for entry in data[1])
+    return green_team_score
 
 def getRedTeamCount():
     data, count = supabase.table('Player').select('*', count='exact').eq('team', 'Red').execute()
