@@ -106,7 +106,7 @@ def playSoundAndCreateWindow(event):
     # window, label, number to start countdown with
     countdownTimer(new_window, label, timerCount)
 
-    # add red and Green frames to the window
+    # add red and Red frames to the window
     new_window.after(timerCount * 1000 + 1000,
                      lambda: playActionDisplay.createRedPlayerFrame(new_window, "Red Team", "#e23b4a"))
     # Creates the Green player frame
