@@ -47,7 +47,6 @@ def deleteData(event):
     dataBase.clearData()
     redTable.update_table()
     greenTable.update_table()
-# sound sample is HERE - plays throughout the game
 
 
 def sound():
@@ -55,35 +54,52 @@ def sound():
     pygame.mixer.music.load("./Track01.mp3")
     pygame.mixer.music.play()
 
-# sound plays for three seconds at beginning of game
-
 
 def intro(duration):
     pygame.mixer.init()
     pygame.mixer.music.load("./Track01.mp3")
     pygame.mixer.music.play()
 
-    start_time = pygame.time.get_ticks()  # Get the current time in milliseconds
+    start_time = pygame.time.get_ticks()
 
-    while pygame.mixer.music.get_busy():  # Continue until the music finishes
-        pygame.time.Clock().tick(60)  # Control the loop speed to prevent high CPU usage
+    while pygame.mixer.music.get_busy():
+        pygame.time.Clock().tick(60)
 
         elapsed_time = pygame.time.get_ticks() - start_time
 
-        if elapsed_time >= duration * 1000:  # Check if the elapsed time exceeds the duration
+        if elapsed_time >= duration * 1000:
             pygame.mixer.music.stop()
-            break  # Exit the loop when the duration is reached
+            break
 
 
 def countdownTimer(new_window, label, count):
-    # destroys window 1 second after zero
     if count < 0:
         label.destroy()
-        # new_window.destroy()
         return
     label.config(text=str(count))
     new_window.after(1000, countdownTimer, new_window, label, count - 1)
 
+
+def createTimerFrame(new_window):
+    count = 360  # 6 minutes * 60 seconds
+    countdown_label = tkinter.Label(new_window, text="6:00", font=(
+        "Impact", 20), fg="whitesmoke", background='black')
+    countdown_label.pack(pady=10)
+
+    def updateCountdown():
+        nonlocal count
+        if count > 0:
+            minutes = count // 60
+            seconds = count % 60
+            time_str = f"{minutes:02}:{seconds:02}"
+            countdown_label.config(text=time_str)
+            count -= 1
+            new_window.after(1000, updateCountdown)
+        else:
+            countdown_label.destroy()
+            new_window.destroy()
+
+    updateCountdown()
 
 
 def playSoundAndCreateWindow(event):
@@ -96,30 +112,21 @@ def playSoundAndCreateWindow(event):
         "Impact", 45), fg="whitesmoke", background='black')
     label.pack(fill='both', expand=True)
 
-    # calls countdown timer upon window creation
     timerCount = 2
-    # window, label, number to start countdown with
     countdownTimer(new_window, label, timerCount)
 
-    # add red and Green frames to the window
     new_window.after(timerCount * 1000 + 1000,
                      lambda: playActionDisplay.createRedPlayerFrame(new_window, "Red Team", "#e23b4a"))
-    # Creates the Green player frame
     new_window.after(timerCount * 1000 + 1000,
                      lambda: playActionDisplay.createGreenPlayerFrame(new_window, "Green Team", "#00CF06"))
     new_window.after(timerCount * 1000 + 1000,lambda: playActionDisplay.createEventFrame(new_window, "Events", "#051ffa"))
-    new_window.after(timerCount * 1000 + 1000, lambda: playActionDisplay.createTimerFrame(new_window))
+    new_window.after(timerCount * 1000 + 1000, lambda: createTimerFrame(new_window))
     new_window.after((timerCount + 15) * 1000,
                      lambda: sendCodesLoop(new_window))
-    # try adding a loop here and getting rid of a loop in the sendCodesLoopFunction
-    # new_window.after(1000, lambda: new_window.update_idletasks)
-    #new_window.after(timerCount * 1000 + 1000,lambda: sixMinuteCountdown(new_window))
 
 
 def main_window():
-    # Hide the splash screen
     splash_root.withdraw()
-    # Create the main application window
     root = tkinter.Tk()
     root.title("Laser Tag Game")
     root.geometry("1400x600")
@@ -128,32 +135,24 @@ def main_window():
     root.grid_columnconfigure(0, weight=1)
     root.bind("<F12>", deleteData)
     root.bind("<F5>", playSoundAndCreateWindow)
-    # creates left frame for playerEntryScreen
     left_frame = customtkinter.CTkFrame(root, fg_color="transparent")
-    left_frame.grid(row=0, column=0)  # positions left frame to be to the left
-    # playerEntryScreen
+    left_frame.grid(row=0, column=0)
     playerEntry.createPlayerEntryFrame(left_frame, "#8d99ae", 5, "#2b2d42")
-    # creates right frame for red/Green table frames
     right_frame = customtkinter.CTkFrame(root, fg_color="transparent")
-    right_frame.grid(row=0, column=1)  # positions left frame to be to the left
+    right_frame.grid(row=0, column=1)
     greenTable.createGreenTableFrame(
         right_frame, "Green Team", "#00CF06", "#05FF0D")
     redTable.createRedTableFrame(right_frame, "Red Team", "#e23b4a", "#900A22")
 
 
-# Create the splash screen
 splash_root = tkinter.Tk()
 splash_root.title("Laser Tag Game")
 splash_root.attributes('-fullscreen', True)
 splash_root.configure(bg="black")
-# Load and display an image on the splash screen
 img = tkinter.PhotoImage(file="logo.png")
 img = img.subsample(img.width() // 700, img.height() // 700)
 splash_label = tkinter.Label(splash_root, image=img)
 splash_label.pack()
-# play 3 seconds of sound when the program is ran
 intro(3)
-# Schedule the main_window function to run after 2 seconds
 splash_root.after(2000, main_window)
-# Start the main event loop
 splash_root.mainloop()
