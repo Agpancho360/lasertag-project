@@ -9,7 +9,7 @@ def createRedPlayerFrame(parent, team_name, background_color):
         redFrame.pack(side = "left")
         #table_frame.grid(row=0, column=0, padx=40, pady=40)
         print("Table frame created")
-        
+
         # Create empty rows
         num_empty_rows = dataBase.getRedTeamCount() + 1
         for i in range(num_empty_rows):
@@ -24,7 +24,7 @@ def createRedPlayerFrame(parent, team_name, background_color):
 
 def updateTableRed(redFrame):
     background_color = "#e23b4a"
-    
+
     # Create Team Score
     teamScore = tkinter.Label(redFrame, text="Red Team Score: " + str(dataBase.getRedTeamScore()), font=("Impact", 15), fg="whitesmoke")
     teamScore.grid(row=0, column=0, padx=25, pady=25)
@@ -51,13 +51,13 @@ def updateTableRed(redFrame):
             label = tkinter.Label(redFrame, text=cell_data, font=("Arial", 10), fg="whitesmoke")
             label.grid(row=i, column=j)
             label.config(bg=background_color)
-     
+
 def createGreenPlayerFrame(parent, team_name, background_color):
     global greenFrame
     greenFrame = tkinter.Frame(parent, bg=background_color, bd=5)
     greenFrame.pack(side = "right")
     print("Green Table frame created")
-        
+
     # Create empty rows
     num_empty_rows = dataBase.getGreenTeamCount() + 1
     for i in range(num_empty_rows):
@@ -68,10 +68,10 @@ def createGreenPlayerFrame(parent, team_name, background_color):
     updateTableGreen(greenFrame)
 
     return greenFrame
-       
+
 def updateTableGreen(greenFrame):
     background_color = "#00CF06"
-    
+
     # Create Team Score
     team_score = tkinter.Label(greenFrame, text="Green Team Score: " + str(dataBase.getGreenTeamScore()), font=("Impact", 15), fg="whitesmoke")
     team_score.grid(row=0, column=0, padx=25, pady=25)
@@ -125,8 +125,27 @@ def updateInfo(new_info):
     # Scroll to the end to show the latest information
     info_text.see(tkinter.END)
 
+def createTimerFrame(new_window):
+    count = 360  # 6 minutes * 60 seconds
+    countdown_label = tkinter.Label(new_window, text="6:00", font=(  # font countdown
+        "Impact", 45), fg="whitesmoke", background='black')
+    countdown_label.pack(fill='both', expand=True)
 
+    # Countdown function to update the label every second
+    def updateCountdown():
+        nonlocal count
+        if count > 0:
+            minutes = count // 60
+            seconds = count % 60
+            time_str = f"{minutes:02}:{seconds:02}"  # Format the time display
+            countdown_label.config(text=time_str)
+            count -= 1
+            new_window.after(1000, updateCountdown)
+        else:
+            countdown_label.destroy()
+            new_window.destroy()  # Perform action after countdown ends
+            # pygame.mixer.music.stop()
 
-
-
+    # Start the countdown after the play action screen appears
+    updateCountdown()
 
