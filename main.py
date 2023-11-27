@@ -15,42 +15,31 @@ def updateTables():
     print("Updating tables...")
     playActionDisplay.updateTableGreen(playActionDisplay.greenFrame)
     playActionDisplay.updateTableRed(playActionDisplay.redFrame)
-    playActionDisplay.updateInfo(dataBase.getEventString())
 
 
-def sendCodesLoop(window, i=0):
-    if i <= 30:
-        clientAddressPort = ("127.0.0.1", 7500)
-        testPort = ("127.0.0.1", 7504)
-        UDPClientSocketTransmit = socket.socket(
-            family=socket.AF_INET, type=socket.SOCK_DGRAM)
-        UDPClientSocketTransmit.bind(testPort)
-        msg1 = str(202)
-        msg2 = str(221)
-        msg3 = str(53)
-        msg4 = str(43)
-
-        if(i < 5):
+def sendCodesLoop(window):
+    clientAddressPort = ("127.0.0.1", 7500)
+    testPort = ("127.0.0.1", 7504)
+    UDPClientSocketTransmit = socket.socket(
+        family=socket.AF_INET, type=socket.SOCK_DGRAM)
+    UDPClientSocketTransmit.bind(testPort)
+    msg1 = str(202)
+    msg2 = str(221)
+    msg3 = str(53)
+    i = 0
+    while (i <= 30):
+        if (i < 5):
             UDPClientSocketTransmit.sendto(
                 str.encode(str(msg1)), clientAddressPort)
-        elif(7 > i >= 5):
+        elif (30 > i >= 5):
             UDPClientSocketTransmit.sendto(
                 str.encode(str(msg3)), clientAddressPort)
-        elif(9 > i >= 7):
-            UDPClientSocketTransmit.sendto(
-                str.encode(str(msg4)), clientAddressPort)
-        elif(30 >= i >= 9):
-            UDPClientSocketTransmit.sendto(
-                str.encode(str(msg1)), clientAddressPort)
         else:
             UDPClientSocketTransmit.sendto(
                 str.encode(str(msg2)), clientAddressPort)
-
         window.after(1000, updateTables)
-
-        # Schedule the next iteration of sendCodesLoop
-        window.after(1000, sendCodesLoop, window, i + 1)
-
+        window.after(1000, window.update_idletasks)
+        i += 1
 
 
 def deleteData(event):
@@ -95,6 +84,31 @@ def countdownTimer(new_window, label, count):
     new_window.after(1000, countdownTimer, new_window, label, count - 1)
 
 
+def sixMinuteCountdown(new_window):
+    count = 360  # 6 minutes * 60 seconds
+    countdown_label = tkinter.Label(new_window, text="6:00", font=(  # font countdown
+        "Impact", 45), fg="whitesmoke", background='black')
+    countdown_label.pack(fill='both', expand=True)
+
+    # Countdown function to update the label every second
+    def updateCountdown():
+        nonlocal count
+        if count > 0:
+            minutes = count // 60
+            seconds = count % 60
+            time_str = f"{minutes:02}:{seconds:02}"  # Format the time display
+            countdown_label.config(text=time_str)
+            count -= 1
+            new_window.after(1000, updateCountdown)
+        else:
+            countdown_label.destroy()
+            new_window.destroy()  # Perform action after countdown ends
+            pygame.mixer.music.stop()
+         
+    # Start the countdown after the play action screen appears
+    updateCountdown()
+
+
 def playSoundAndCreateWindow(event):
     sound()
     new_window = tkinter.Toplevel()
@@ -110,21 +124,18 @@ def playSoundAndCreateWindow(event):
     # window, label, number to start countdown with
     countdownTimer(new_window, label, timerCount)
 
-    # add red and Red frames to the window
+    # add red and Green frames to the window
     new_window.after(timerCount * 1000 + 1000,
                      lambda: playActionDisplay.createRedPlayerFrame(new_window, "Red Team", "#e23b4a"))
     # Creates the Green player frame
     new_window.after(timerCount * 1000 + 1000,
                      lambda: playActionDisplay.createGreenPlayerFrame(new_window, "Green Team", "#00CF06"))
-
-    new_window.after(timerCount * 1000 + 1000,
-                     lambda: playActionDisplay.createEventFrame(new_window, "Events", "#051ffa"))
-
     new_window.after((timerCount + 15) * 1000,
                      lambda: sendCodesLoop(new_window))
-    
-    new_window.after(1000, lambda: new_window.update_idletasks)
-
+    # try adding a loop here and getting rid of a loop in the sendCodesLoopFunction
+    # new_window.after(1000, lambda: new_window.update_idletasks)
+    new_window.after(timerCount * 1000 + 1000,
+                     lambda: sixMinuteCountdown(new_window))
 
 
 def main_window():
