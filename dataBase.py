@@ -49,6 +49,12 @@ def getPlayerName(id):
     codename = name[0]['codename']
     return str(codename)
 
+def updatePlayerName(id):
+    response = supabase.table('Player').select('codename').eq('ID', id).execute()
+    score = response.data
+    name = score[0]['codename']
+    supabase.table('Player').update({'codename' : str(("B " + name))}).eq('ID', id).execute()
+
 def updateEventString(str):
     supabase.table('Event Table').update({'string' : str }).eq('ID', 1).execute()
 

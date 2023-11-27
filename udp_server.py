@@ -34,7 +34,9 @@ while (True):
         print("Code 53 received: Red base scored on!")
         randomGreenPlayer = dataBase.getRandomGreenPlayer()
         dataBase.updatePlayerScore(randomGreenPlayer, 100)
-        dataBase.updateEventString("Red base scored on by Player " + dataBase.getPlayerName(randomGreenPlayer))
+        if(dataBase.getPlayerName(randomGreenPlayer)[0] != "B" and dataBase.getPlayerName(randomGreenPlayer)[0] != " "):
+            dataBase.updateEventString("Red base scored on by Player " + dataBase.getPlayerName(randomGreenPlayer))
+            dataBase.updatePlayerName(randomGreenPlayer)
         # playActionDisplay.updateTableGreen(playActionDisplay.greenFrame)
         #update code to correctly select from someone that is red or green
         # Implement your scoring logic for the red team
@@ -42,7 +44,9 @@ while (True):
         print("Code 43 received: Green base scored on!")
         randomRedPlayer = dataBase.getRandomRedPlayer()
         dataBase.updatePlayerScore(randomRedPlayer, 100)
-        dataBase.updateEventString("Green base scored on by Player " + dataBase.getPlayerName(randomRedPlayer))
+        if(dataBase.getPlayerName(randomRedPlayer)[0] != "B" and dataBase.getPlayerName(randomRedPlayer)[1] != " "):
+            dataBase.updateEventString("Green base scored on by Player " + dataBase.getPlayerName(randomRedPlayer))
+            dataBase.updatePlayerName(randomRedPlayer)
         # playActionDisplay.updateTableRed(playActionDisplay.redFrame)
         # Implement your scoring logic for the green team
     else:
